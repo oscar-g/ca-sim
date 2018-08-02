@@ -1,0 +1,11 @@
+{
+  "name": "ca-sim",
+  "version": "1.0.0",
+  "description": "A runner for 2D cell automata.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
+  "license": "MIT"
+}
