@@ -5,6 +5,7 @@ import StateI from './interfaces/State';
 import Cell from './interfaces/Cell';
 import Location from './interfaces/Location';
 
+// @todo support growing data
 class State implements StateI {
   turn: number = 0;
   data: QuadTree<Cell>;
@@ -29,8 +30,6 @@ class State implements StateI {
   exportData(): Uint8Array[] {
     const data: Uint8Array[] = [];
 
-    // encode the data
-    // @todo what if the array grows?
     for(var y = 0; y < this.initialData.length; y++) {
       data[y] = new Uint8Array(this.initialData.length);
 
@@ -99,7 +98,7 @@ class State implements StateI {
     return nbh;
   }
 
-  getLivingNeighbors(loc: Location, size?: number): Cell[] {
+  getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
     return this.getNeighborhood(loc, size).find(_ => _.state === 1);
   }
 

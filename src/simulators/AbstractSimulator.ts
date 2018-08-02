@@ -24,10 +24,12 @@ export default abstract class AbstractSimulator implements SimI {
     return this;
   }
 
+  // apply the sim rules at each location
+  // set the new state
   turn(): this {
     const newCellLocations: Location[] = [];
 
-    // each row, each column
+    // @todo dynamic size
     for(var y = 0; y < this.state.initialData.length; y++) {
       for(var x = 0; x < this.state.initialData.length; x++) {
         this.applyRules({x, y}).map(_ => {
@@ -47,17 +49,12 @@ export default abstract class AbstractSimulator implements SimI {
   }
 
   beforeTurn(): this {
-    // console.log("BEFORE");
     return this;
   }
 
   afterTurn(): this {
-    // console.log("AFTER");
     return this;
   }
 
-    /**
-   * Apply a simulation at the cell location.
-   */
   abstract applyRules(loc: Location): Option<Cell>
 }

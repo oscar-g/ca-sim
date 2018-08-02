@@ -11,8 +11,11 @@ class LifeSimulator extends AbstractSimulator {
     super(config, initialData);
   }
 
+  /**
+   * Applies the current LifeRule.
+   */
   applyRules(loc: Location): Option<Cell> {
-    const livingNeighbors = this.state.getLivingNeighbors(loc, 3);
+    const livingNeighbors = this.state.getLivingNeighbors(loc, this.config.neighborhoodSize);
     let live = false;
 
     for(var s = 0;s < this.config.rule.survive.length; s++) {
@@ -29,6 +32,7 @@ class LifeSimulator extends AbstractSimulator {
       }
     }
 
+    // @todo support numeric state
     return live ? some<Cell>({ ...loc, state: 1 }) : none;
   }
 }
