@@ -13,6 +13,8 @@ class LifeSimulator extends AbstractSimulator {
 
   /**
    * Applies the current LifeRule.
+   * 
+   * Counts the surviving neighbors and comapres with config
    */
   applyRules(loc: Location): Option<Cell> {
     const livingNeighbors = this.state.getLivingNeighbors(loc, this.config.neighborhoodSize);

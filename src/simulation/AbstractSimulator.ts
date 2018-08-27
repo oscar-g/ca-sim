@@ -3,7 +3,7 @@ import * as QuadTree from 'quadtree-lib';
 
 import SimI from './../interfaces/Simulator';
 import Config from './../interfaces/Config';
-import State from './../State';
+import State from './State';
 import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
 
