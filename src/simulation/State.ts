@@ -1,12 +1,12 @@
 import * as QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
 
-import State from '../interfaces/State';
+import IState from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
 // @todo support growing data
-class State implements StateI {
+class State implements IState {
   turn: number = 0;
   data: QuadTree<Cell>;
 
