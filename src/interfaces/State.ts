@@ -4,17 +4,19 @@ import { Option } from 'ts-option';
 import Cell from './Cell';
 import Location from './Location';
 
+type StateData = QuadTree<Cell>;
+
 interface State {
   turn: number
-  data: QuadTree<Cell>
+  data: StateData
   initialData: Uint8Array[]
 
   exportData(): Uint8Array[]
-  nextTurn(locs: Location[]): this
-
-  addCell(loc: Location): this
-  getCell(loc: Location): Option<Cell>
-  removeCell(loc: Location): this
+  
+  setData(cell: Cell): this
+  delData(loc: Location): this
+  getData(loc: Location): Option<Cell>
+  setNextTurnCells(data: Cell[]): this
 
   getNeighborhood(loc: Location, size: number): QuadTree<Cell>
   getLivingNeighbors(loc: Location, size: number): Cell[]

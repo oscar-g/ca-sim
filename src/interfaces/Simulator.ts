@@ -25,10 +25,10 @@ interface Simulator {
   isSimComplete(): boolean
 
   /**
-   * Apply the automata rules at the specified location and return the resulting cell, if alive.
+   * Apply the automata rules at the specified location and return the resulting cell.
    * @param loc 
    */
-  applyRules(loc: Location): Option<Cell>
+  applyRules(loc: Location): Cell
 
   // hooks
   beforeTurn(): this

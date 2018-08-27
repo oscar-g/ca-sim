@@ -14,11 +14,13 @@ class LifeSimulator extends AbstractSimulator {
   /**
    * Applies the current LifeRule.
    * 
-   * Counts the surviving neighbors and comapres with config
+   * Counts the surviving neighbors and compares with LifeRule
+   * @todo track cell state transition
    */
-  applyRules(loc: Location): Option<Cell> {
+  applyRules(loc: Location): Cell {
     const livingNeighbors = this.state.getLivingNeighbors(loc, this.config.neighborhoodSize);
     let live = false;
+    let newState: Cell["state"] = 0;
 
     for(var s = 0;s < this.config.rule.survive.length; s++) {
       if (livingNeighbors.length === this.config.rule.survive[s]) {
@@ -33,9 +35,15 @@ class LifeSimulator extends AbstractSimulator {
         break;
       }
     }
+    
+    if (live) {
+      newState = 1;
+    }
 
-    // @todo support numeric state
-    return live ? some<Cell>({ ...loc, state: 1 }) : none;
+    return {
+      ...loc,
+      state: newState,
+    };
   }
 }
 

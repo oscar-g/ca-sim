@@ -16,12 +16,15 @@ class State implements StateI {
       height: initialData.length,
       maxElements: 9,
     });
-  
+
     initialData.forEach((chr, y) => {
       chr.forEach((state, x) => {
-        // populate live cells only
-        if (state > 0) {
-          this.addCell({x, y});
+        if (state) {
+          // populate live cells only
+          this.setData({
+            x, y,
+            state: state as Cell["state"]
+          });
         }
       });
     });
@@ -34,45 +37,46 @@ class State implements StateI {
       data[y] = new Uint8Array(this.initialData.length);
 
       for(var x = 0; x < this.initialData.length; x++) {
-        data[y][x] = this.getCell({x, y}).map(_ => 1).getOrElse(0);
+        data[y][x] = this.getData({x, y}).map(_ => _.state).getOrElse(0);
       }
     }
 
     return data;
   }
 
-  nextTurn(locs: Location[]): this {
+  setNextTurnCells(cells: Cell[]) {
+    this.data.clear();
+
+    cells.forEach(c => {
+      // populate live cells only
+      if (c.state) {
+        this.setData(c)
+      }
+    })
+
     this.turn++;
-    this.data = new QuadTree({
-      width: this.initialData.length,
-      height: this.initialData.length,
-      maxElements: 9,
-    });
-  
-    locs.forEach(this.addCell);
+
+    return this
+  }
+
+  setData(cell: Cell) {
+    this.data.push(cell);
 
     return this;
   }
 
-  addCell(loc: Location): this {
-    this.data.push({
-      ...loc,
-      state: 1,
+  delData(loc: Location) {
+    this.data.where(loc).forEach(x => {
+      this.data.remove(x)
     });
 
     return this;
   }
 
-  getCell(loc: Location): Option<Cell> {
+  getData(loc: Location): Option<Cell> {
     const result = this.data.where(loc);
 
     return result.length === 0 ? none : some<Cell>(result[0]);
-  }
-
-  removeCell(loc: Location): this {
-    this.getCell(loc).map(this.data.remove)
-
-    return this;
   }
 
   getNeighborhood(loc: Location, size: number = 3) {
@@ -89,7 +93,7 @@ class State implements StateI {
 
     for(var y = yBounds[0]; y <= yBounds[1]; y++) {
       for(var x = xBounds[0]; x <= xBounds[1]; x++) {
-        const cell = this.getCell({x, y}).getOrElse({x, y, state: 0});
+        const cell = this.getData({x, y}).getOrElse({x, y, state: 0});
 
         nbh.push(cell);
       }

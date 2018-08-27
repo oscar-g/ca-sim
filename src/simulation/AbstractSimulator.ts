@@ -27,19 +27,17 @@ export default abstract class AbstractSimulator implements SimI {
   // apply the sim rules at each location
   // set the new state
   turn(): this {
-    const newCellLocations: Location[] = [];
+    const newStateCells: Cell[] = [];
 
     // @todo dynamic size
     for(var y = 0; y < this.state.initialData.length; y++) {
       for(var x = 0; x < this.state.initialData.length; x++) {
-        this.applyRules({x, y}).map(_ => {
-          newCellLocations.push(_);
-        });
+        newStateCells.push(this.applyRules({x, y}));
       }
     }
 
     // @todo keep track of old locations
-    this.state.nextTurn(newCellLocations);
+    this.state.setNextTurnCells(newStateCells);
 
     return this;
   }
@@ -56,5 +54,5 @@ export default abstract class AbstractSimulator implements SimI {
     return this;
   }
 
-  abstract applyRules(loc: Location): Option<Cell>
+  abstract applyRules(loc: Location): Cell
 }
