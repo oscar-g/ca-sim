@@ -1,38 +1,37 @@
-import { Option } from 'ts-option';
 
-import Config from "./Config";
-import Location from "./Location";
-import Cell from "./Cell";
-import State from "./State";
+import Config from './Config';
+import Location from './Location';
+import Cell from './Cell';
+import State from './State';
 
 interface Simulator {
-  config: Config
-  state: State
+  config: Config;
+  state: State;
 
   /**
    * Run the simulation until complete.
    */
-  run(): this
+  run(): this;
 
   /**
    * Run the simulation for a single turn.
    */
-  turn(): this
+  turn(): this;
 
   /**
    * Check if the simulation is complete.
    */
-  isSimComplete(): boolean
+  isSimComplete(): boolean;
 
   /**
    * Apply the automata rules at the specified location and return the resulting cell.
-   * @param loc 
+   * @param loc
    */
-  applyRules(loc: Location): Cell
+  applyRules(loc: Location): Cell;
 
   // hooks
-  beforeTurn(): this
-  afterTurn(): this
+  beforeTurn(): this;
+  afterTurn(): this;
 }
 
 export default Simulator;

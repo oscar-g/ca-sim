@@ -1,7 +1,7 @@
 import * as QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
 
-import StateI from '../interfaces/State';
+import State from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
@@ -23,7 +23,7 @@ class State implements StateI {
           // populate live cells only
           this.setData({
             x, y,
-            state: state as Cell["state"]
+            state: state as Cell['state'],
           });
         }
       });
@@ -33,11 +33,11 @@ class State implements StateI {
   exportData(): Uint8Array[] {
     const data: Uint8Array[] = [];
 
-    for(var y = 0; y < this.initialData.length; y++) {
+    for (let y = 0; y < this.initialData.length; y++) {
       data[y] = new Uint8Array(this.initialData.length);
 
-      for(var x = 0; x < this.initialData.length; x++) {
-        data[y][x] = this.getData({x, y}).map(_ => _.state).getOrElse(0);
+      for (let x = 0; x < this.initialData.length; x++) {
+        data[y][x] = this.getData({ x, y }).map(_ => _.state).getOrElse(0);
       }
     }
 
@@ -50,13 +50,13 @@ class State implements StateI {
     cells.forEach(c => {
       // populate live cells only
       if (c.state) {
-        this.setData(c)
+        this.setData(c);
       }
-    })
+    });
 
     this.turn++;
 
-    return this
+    return this;
   }
 
   setData(cell: Cell) {
@@ -67,7 +67,7 @@ class State implements StateI {
 
   delData(loc: Location) {
     this.data.where(loc).forEach(x => {
-      this.data.remove(x)
+      this.data.remove(x);
     });
 
     return this;
@@ -81,19 +81,19 @@ class State implements StateI {
 
   getNeighborhood(loc: Location, size: number = 3) {
     const [yBounds, xBounds] = State.getNeighborhoodBounds(loc, size);
-    size = yBounds[1] - yBounds[0];
+    const newSize = yBounds[1] - yBounds[0];
 
     const nbh = new QuadTree<Cell>({
-      width: size,
-      height: size,
+      width: newSize,
+      height: newSize,
       maxElements: 4,
       x: loc.x,
       y: loc.y,
     });
 
-    for(var y = yBounds[0]; y <= yBounds[1]; y++) {
-      for(var x = xBounds[0]; x <= xBounds[1]; x++) {
-        const cell = this.getData({x, y}).getOrElse({x, y, state: 0});
+    for (let y = yBounds[0]; y <= yBounds[1]; y++) {
+      for (let x = xBounds[0]; x <= xBounds[1]; x++) {
+        const cell = this.getData({ x, y }).getOrElse({ x, y, state: 0 });
 
         nbh.push(cell);
       }
@@ -106,10 +106,11 @@ class State implements StateI {
     return this.getNeighborhood(loc, size).find(_ => _.state === 1);
   }
 
-  static getNeighborhoodBounds(loc: Location, size: number = 3) {
+  static getNeighborhoodBounds(loc: Location, s: number = 3) {
+    let size = s;
     if (size % 2 === 0) { size++; }
-    if (size < 3) {size = 3;}
-    
+    if (size < 3) { size = 3; }
+
     const half = (size - 1) / 2;
 
     return [

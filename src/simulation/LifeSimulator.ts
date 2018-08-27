@@ -1,4 +1,3 @@
-import { Option, none, some } from 'ts-option';
 
 import AbstractSimulator from './AbstractSimulator';
 import Location from '../interfaces/Location';
@@ -13,29 +12,29 @@ class LifeSimulator extends AbstractSimulator {
 
   /**
    * Applies the current LifeRule.
-   * 
+   *
    * Counts the surviving neighbors and compares with LifeRule
    * @todo track cell state transition
    */
   applyRules(loc: Location): Cell {
     const livingNeighbors = this.state.getLivingNeighbors(loc, this.config.neighborhoodSize);
     let live = false;
-    let newState: Cell["state"] = 0;
+    let newState: Cell['state'] = 0;
 
-    for(var s = 0;s < this.config.rule.survive.length; s++) {
+    for (let s = 0; s < this.config.rule.survive.length; s++) {
       if (livingNeighbors.length === this.config.rule.survive[s]) {
         live = true;
         break;
       }
     }
 
-    for(var s = 0;s < this.config.rule.born.length; s++) {
+    for (let s = 0; s < this.config.rule.born.length; s++) {
       if (livingNeighbors.length === this.config.rule.born[s]) {
         live = true;
         break;
       }
     }
-    
+
     if (live) {
       newState = 1;
     }

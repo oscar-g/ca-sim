@@ -7,19 +7,19 @@ import Location from './Location';
 type StateData = QuadTree<Cell>;
 
 interface State {
-  turn: number
-  data: StateData
-  initialData: Uint8Array[]
+  turn: number;
+  data: StateData;
+  initialData: Uint8Array[];
 
-  exportData(): Uint8Array[]
-  
-  setData(cell: Cell): this
-  delData(loc: Location): this
-  getData(loc: Location): Option<Cell>
-  setNextTurnCells(data: Cell[]): this
+  exportData(): Uint8Array[];
 
-  getNeighborhood(loc: Location, size: number): QuadTree<Cell>
-  getLivingNeighbors(loc: Location, size: number): Cell[]
+  setData(cell: Cell): this;
+  delData(loc: Location): this;
+  getData(loc: Location): Option<Cell>;
+  setNextTurnCells(data: Cell[]): this;
+
+  getNeighborhood(loc: Location, size: number): QuadTree<Cell>;
+  getLivingNeighbors(loc: Location, size: number): Cell[];
 }
 
 export default State;

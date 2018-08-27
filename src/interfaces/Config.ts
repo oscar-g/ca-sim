@@ -1,6 +1,6 @@
 interface Config {
-  maxTurns: number
-  neighborhoodSize: number
+  maxTurns: number;
+  neighborhoodSize: number;
 }
 
 export default Config;
