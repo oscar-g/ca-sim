@@ -32,6 +32,7 @@ interface Simulator {
   // hooks
   beforeTurn(): this;
   afterTurn(): this;
+  afterComplete(): this;
 }
 
 export default Simulator;

@@ -19,6 +19,8 @@ export default abstract class AbstractSimulator implements ISimulator {
       this.afterTurn();
     }
 
+    this.afterComplete();
+
     return this;
   }
 
@@ -49,6 +51,10 @@ export default abstract class AbstractSimulator implements ISimulator {
   }
 
   afterTurn(): this {
+    return this;
+  }
+  
+  afterComplete(): this {
     return this;
   }
 
