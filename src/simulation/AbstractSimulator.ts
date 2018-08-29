@@ -3,11 +3,12 @@ import Config from './../interfaces/Config';
 import State from './State';
 import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
+import ISimulator from './../interfaces/Simulator'
 
-export default abstract class AbstractSimulator implements SimI {
+export default abstract class AbstractSimulator implements ISimulator {
   state: State;
 
-  constructor(public config: Config, initialData: Uint8Array[]) {
+  constructor(public config: Config, initialData: (0|1)[][]) {
     this.state = new State(initialData);
   }
 

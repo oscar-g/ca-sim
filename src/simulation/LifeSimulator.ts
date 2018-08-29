@@ -6,7 +6,7 @@ import LifeConfig from '../interfaces/LifeConfig';
 import LifeRule from '../interfaces/LifeRule';
 
 class LifeSimulator extends AbstractSimulator {
-  constructor(public config: LifeConfig, initialData: Uint8Array[]) {
+  constructor(public config: LifeConfig, initialData: (0|1)[][]) {
     super(config, initialData);
   }
 

@@ -2,16 +2,20 @@ import * as QuadTree from 'quadtree-lib';
 import { Option } from 'ts-option';
 
 import Cell from './Cell';
-import Location from './Location';
+import Location from './Location'; 
 
-type StateData = QuadTree<Cell>;
-
+/**
+ * Simulator state machine
+ *
+ * Input data is 2-dimensional array of 0|1
+ * Uses QuadTree to represent input data internally.
+ */
 interface State {
   turn: number;
-  data: StateData;
-  initialData: Uint8Array[];
+  data: QuadTree<Cell>;
+  initialData: (0|1)[][];
 
-  exportData(): Uint8Array[];
+  exportData(): State["initialData"]
 
   setData(cell: Cell): this;
   delData(loc: Location): this;

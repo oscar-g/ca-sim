@@ -5,12 +5,12 @@ import IState from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
-// @todo support growing data
+/** @todo support growing data size */
 class State implements IState {
   turn: number = 0;
   data: QuadTree<Cell>;
 
-  constructor(public initialData: Uint8Array[]) {
+  constructor(public initialData: (0|1)[][]) {
     this.data = new QuadTree({
       width: initialData.length,
       height: initialData.length,
@@ -19,7 +19,7 @@ class State implements IState {
 
     initialData.forEach((chr, y) => {
       chr.forEach((state, x) => {
-        if (state) {
+        if (state === 1) {
           // populate live cells only
           this.setData({
             x, y,
@@ -30,11 +30,11 @@ class State implements IState {
     });
   }
 
-  exportData(): Uint8Array[] {
-    const data: Uint8Array[] = [];
+  exportData() {
+    const data: (0|1)[][] = [];
 
     for (let y = 0; y < this.initialData.length; y++) {
-      data[y] = new Uint8Array(this.initialData.length);
+      data[y] = new Array<0|1>(this.initialData.length);
 
       for (let x = 0; x < this.initialData.length; x++) {
         data[y][x] = this.getData({ x, y }).map(_ => _.state).getOrElse(0);
