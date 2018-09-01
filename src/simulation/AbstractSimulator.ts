@@ -3,10 +3,10 @@ import Config from './../interfaces/Config';
 import State from './State';
 import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
-import ISimulator from './../interfaces/Simulator'
+import Simulator from './../interfaces/Simulator';
 import { InitialStateData } from '../interfaces/State';
 
-export default abstract class AbstractSimulator implements ISimulator {
+export default abstract class AbstractSimulator implements Simulator {
   state: State;
 
   constructor(public config: Config, initialData: InitialStateData) {
@@ -44,7 +44,7 @@ export default abstract class AbstractSimulator implements ISimulator {
   }
 
   isSimComplete() {
-    return this.state.turn >= this.config.maxTurns
+    return this.state.turn >= this.config.maxTurns;
   }
 
   beforeTurn(): this {
@@ -54,7 +54,7 @@ export default abstract class AbstractSimulator implements ISimulator {
   afterTurn(): this {
     return this;
   }
-  
+
   afterComplete(): this {
     return this;
   }

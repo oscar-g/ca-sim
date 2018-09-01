@@ -2,7 +2,7 @@ import * as QuadTree from 'quadtree-lib';
 import { Option } from 'ts-option';
 
 import Cell from './Cell';
-import Location from './Location'; 
+import Location from './Location';
 
 /**
  * Simulator state machine
@@ -11,14 +11,14 @@ import Location from './Location';
  * Uses QuadTree to represent input data internally.
  */
 
-export type InitialStateData = Cell["state"][][];
+export type InitialStateData = Cell['state'][][];
 
 interface State {
   turn: number;
   data: QuadTree<Cell>;
   initialData: InitialStateData;
 
-  exportData(): State["initialData"]
+  exportData(): State['initialData'];
 
   setData(cell: Cell): this;
   delData(loc: Location): this;

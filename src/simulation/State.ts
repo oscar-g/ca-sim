@@ -1,7 +1,8 @@
 import * as QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
 
-import IState, {InitialStateData} from '../interfaces/State';
+// tslint:disable-next-line:import-name
+import IState, { InitialStateData } from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
@@ -34,7 +35,7 @@ class State implements IState {
     const data: InitialStateData = [];
 
     for (let y = 0; y < this.initialData.length; y++) {
-      data[y] = new Array<0|1>(this.initialData.length);
+      data[y] = [];
 
       for (let x = 0; x < this.initialData.length; x++) {
         data[y][x] = this.getData({ x, y }).map(_ => _.state).getOrElse(0);
@@ -47,7 +48,7 @@ class State implements IState {
   setNextTurnCells(cells: Cell[]) {
     this.data.clear();
 
-    cells.forEach(c => {
+    cells.forEach((c) => {
       // populate live cells only
       if (c.state === 1) {
         this.setData(c);
@@ -66,7 +67,7 @@ class State implements IState {
   }
 
   delData(loc: Location) {
-    this.data.where(loc).forEach(x => {
+    this.data.where(loc).forEach((x) => {
       this.data.remove(x);
     });
 
