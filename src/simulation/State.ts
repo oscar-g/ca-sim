@@ -80,6 +80,9 @@ class State implements IState {
     return result.length === 0 ? none : some<Cell>(result[0]);
   }
 
+  /**
+   * Return elements of the neighborhood centered at loc
+   */
   getNeighborhood(loc: Location, size: number = 3) {
     const [yBounds, xBounds] = State.getNeighborhoodBounds(loc, size);
     const newSize = yBounds[1] - yBounds[0];
@@ -103,11 +106,17 @@ class State implements IState {
     return nbh;
   }
 
+  /**
+   * Return list of living cells in neighborhood centered at loc.
+   */
   getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
     return this.getNeighborhood(loc, size).find(_ => _.state === 1);
   }
 
-  static getNeighborhoodBounds(loc: Location, s: number = 3) {
+  /**
+   * Returns the min/max x/y boundary of a s-sized neighborhood, centered at loc
+   */
+  static getNeighborhoodBounds(loc: Location, s: number = 3): [[number, number], [number, number]] {
     let size = s;
     if (size % 2 === 0) { size++; }
     if (size < 3) { size = 3; }
