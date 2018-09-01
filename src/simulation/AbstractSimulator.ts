@@ -44,7 +44,7 @@ export default abstract class AbstractSimulator implements ISimulator {
   }
 
   isSimComplete() {
-    return !(this.state.turn <= this.config.maxTurns);
+    return this.state.turn >= this.config.maxTurns
   }
 
   beforeTurn(): this {
