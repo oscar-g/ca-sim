@@ -4,7 +4,8 @@
   "description": "A runner for 2D cell automata.",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-mocha test/**/*.spec.ts",
+    "lint": "tslint --fix --project ./"
   },
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
   "license": "MIT",
@@ -13,12 +14,13 @@
     "ts-option": "^1.1.5"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.5",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "ts-mocha": "^2.0.0",
     "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.10.0",
-    "typescript": "^2.8.4"
+    "tslint-config-airbnb": "^5.11.0",
+    "typescript": "^2.9.2"
   }
 }
