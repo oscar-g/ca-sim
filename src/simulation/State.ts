@@ -1,7 +1,7 @@
 import * as QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
 
-import IState from '../interfaces/State';
+import IState, {InitialStateData} from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
@@ -10,7 +10,7 @@ class State implements IState {
   turn: number = 0;
   data: QuadTree<Cell>;
 
-  constructor(public initialData: (0|1)[][]) {
+  constructor(public initialData: InitialStateData) {
     this.data = new QuadTree({
       width: initialData.length,
       height: initialData.length,
@@ -31,7 +31,7 @@ class State implements IState {
   }
 
   exportData() {
-    const data: (0|1)[][] = [];
+    const data: InitialStateData = [];
 
     for (let y = 0; y < this.initialData.length; y++) {
       data[y] = new Array<0|1>(this.initialData.length);
@@ -49,7 +49,7 @@ class State implements IState {
 
     cells.forEach(c => {
       // populate live cells only
-      if (c.state) {
+      if (c.state === 1) {
         this.setData(c);
       }
     });

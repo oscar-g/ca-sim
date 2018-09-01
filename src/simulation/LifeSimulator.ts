@@ -4,9 +4,10 @@ import Location from '../interfaces/Location';
 import Cell from '../interfaces/Cell';
 import LifeConfig from '../interfaces/LifeConfig';
 import LifeRule from '../interfaces/LifeRule';
+import { InitialStateData } from '../interfaces/State';
 
 class LifeSimulator extends AbstractSimulator {
-  constructor(public config: LifeConfig, initialData: (0|1)[][]) {
+  constructor(public config: LifeConfig, initialData: InitialStateData) {
     super(config, initialData);
   }
 

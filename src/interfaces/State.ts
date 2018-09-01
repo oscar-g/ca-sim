@@ -10,10 +10,13 @@ import Location from './Location';
  * Input data is 2-dimensional array of 0|1
  * Uses QuadTree to represent input data internally.
  */
+
+export type InitialStateData = Cell["state"][][];
+
 interface State {
   turn: number;
   data: QuadTree<Cell>;
-  initialData: (0|1)[][];
+  initialData: InitialStateData;
 
   exportData(): State["initialData"]
 

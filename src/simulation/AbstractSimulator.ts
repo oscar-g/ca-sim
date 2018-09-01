@@ -4,11 +4,12 @@ import State from './State';
 import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
 import ISimulator from './../interfaces/Simulator'
+import { InitialStateData } from '../interfaces/State';
 
 export default abstract class AbstractSimulator implements ISimulator {
   state: State;
 
-  constructor(public config: Config, initialData: (0|1)[][]) {
+  constructor(public config: Config, initialData: InitialStateData) {
     this.state = new State(initialData);
   }
 
