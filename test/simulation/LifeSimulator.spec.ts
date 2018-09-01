@@ -5,14 +5,6 @@ import LifeConfig from '../../src/interfaces/LifeConfig';
 import Cell from '../../src/interfaces/Cell';
 import Location from '../../src/interfaces/Location';
 
-const testCase: InitialStateData = [
-  [0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0],
-  [0, 0, 1, 0, 0],
-  [1, 0, 1, 1, 0],
-  [0, 0, 0, 0, 0],
-];
-
 describe('LifeSimulator', () => {
   describe('applyRules()', () => {
     context('Conway\'s Game of Life', () => {

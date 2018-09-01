@@ -18,7 +18,10 @@ class LifeSimulator extends AbstractSimulator {
    * @todo track cell state transition
    */
   applyRules(loc: Location): Cell {
-    const livingNeighbors = this.state.getLivingNeighbors(loc, this.config.neighborhoodSize);
+    const livingNeighbors = this.state
+      .getLivingNeighbors(loc, this.config.neighborhoodSize)
+      // remove the current cell from the neighbor count
+      .filter(({ x, y }) => !(x === loc.x && y === loc.y));
     let live = false;
     let newState: Cell['state'] = 0;
 
@@ -50,7 +53,7 @@ class LifeSimulator extends AbstractSimulator {
 // @todo add other common rules
 const rules: { [k: string]: LifeRule } = {
   conway: {
-    born: [2],
+    born: [3],
     survive: [3, 2],
   },
 };
