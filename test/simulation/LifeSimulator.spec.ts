@@ -36,13 +36,14 @@ describe('LifeSimulator', () => {
         const sim = new LifeSimulator(config, [
           [0, 0, 0, 0],
           [0, 1, 1, 0],
-          [0, 0, 1, 1],
+          [1, 0, 1, 1],
           [0, 0, 0, 0],
         ]);
 
         const expectLivingLocations: Location[] = [
           { x: 1, y: 1 },
           { x: 2, y: 1 },
+          { x: 0, y: 2 },
         ];
 
         sim.run();
@@ -56,12 +57,13 @@ describe('LifeSimulator', () => {
         const sim = new LifeSimulator(config, [
           [0, 0, 0, 0],
           [0, 1, 1, 0],
-          [0, 1, 1, 1],
+          [1, 1, 1, 1],
           [0, 0, 1, 0],
         ]);
         const expectDeadLocations: Location[] = [
           { x: 2, y: 1 },
           { x: 2, y: 2 },
+          { x: 0, y: 2 },
         ];
 
         sim.run();
@@ -82,6 +84,7 @@ describe('LifeSimulator', () => {
         const expectLivingLocations: Location[] = [
           { x: 1, y: 2 },
           { x: 3, y: 2 },
+          { x: 0, y: 1 },
         ];
 
         const expectDeadLocations: Location[] = [
