@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import State from '../../src/simulation/State';
 
-describe.only('State', () => {
+describe('State', () => {
   describe('setData()', () => {
     it('updates live cells', () => {
       const state = new State([

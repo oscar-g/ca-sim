@@ -60,23 +60,39 @@ class State implements IState {
     return this;
   }
 
-  setData(cell: Cell) {
-    this.data.push(cell);
+  setData({x, y, ...cell}: Cell) {
+    // delete old data, first
+    this.delData({x, y})
 
-    return this;
-  }
-
-  delData(loc: Location) {
-    this.data.where(loc).forEach((x) => {
-      this.data.remove(x);
+    // add the cell
+    this.data.push({
+      x: x % this.initialData.length,
+      y: y % this.initialData.length,
+      ...cell,
     });
 
     return this;
   }
 
-  getData(loc: Location): Option<Cell> {
-    const result = this.data.where(loc);
+  delData({x, y}: Location) {
+    // find all data at location
+    this.data.where({
+      x: x % this.initialData.length,
+      y: y % this.initialData.length,
+    }).forEach((l) => {
+      this.data.remove(l);
+    });
 
+    return this;
+  }
+
+  getData({ x, y }: Location): Option<Cell> {
+    const result = this.data.where({
+      x: x % this.initialData.length,
+      y: y % this.initialData.length,
+    });
+
+    // console.log("GOT DATA", result)
     return result.length === 0 ? none : some<Cell>(result[0]);
   }
 
