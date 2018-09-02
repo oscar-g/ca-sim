@@ -60,25 +60,25 @@ class State implements IState {
     return this;
   }
 
-  setData({x, y, ...cell}: Cell) {
+  setData({ x, y, ...cell }: Cell) {
     // delete old data, first
-    this.delData({x, y})
+    this.delData({ x, y });
 
     // add the cell
     this.data.push({
-      x: x % this.initialData.length,
-      y: y % this.initialData.length,
+      x: Math.abs(x % this.initialData.length),
+      y: Math.abs(y % this.initialData.length),
       ...cell,
     });
 
     return this;
   }
 
-  delData({x, y}: Location) {
+  delData({ x, y }: Location) {
     // find all data at location
     this.data.where({
-      x: x % this.initialData.length,
-      y: y % this.initialData.length,
+      x: Math.abs(x % this.initialData.length),
+      y: Math.abs(y % this.initialData.length),
     }).forEach((l) => {
       this.data.remove(l);
     });
@@ -88,11 +88,10 @@ class State implements IState {
 
   getData({ x, y }: Location): Option<Cell> {
     const result = this.data.where({
-      x: x % this.initialData.length,
-      y: y % this.initialData.length,
+      x: Math.abs(x % this.initialData.length),
+      y: Math.abs(y % this.initialData.length),
     });
 
-    // console.log("GOT DATA", result)
     return result.length === 0 ? none : some<Cell>(result[0]);
   }
 
