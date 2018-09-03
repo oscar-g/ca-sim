@@ -2,10 +2,12 @@
   "name": "ca-sim",
   "version": "1.0.0",
   "description": "A runner for 2D cell automata.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "ts-mocha test/**/*.spec.ts",
-    "lint": "tslint --fix --project ./"
+    "lint": "tslint --fix --project ./",
+    "build": "rm -rf dist && tsc"
   },
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
   "license": "MIT",
@@ -22,5 +24,9 @@
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "typescript": "^2.9.2"
-  }
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
 }
