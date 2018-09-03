@@ -1,5 +1,11 @@
-export * from './simulation/AbstractSimulator';
-export * from './simulation/LifeSimulator';
-export * from './simulation/State';
+import LifeSimulator, { rules as lifeSimulatorRules } from './simulation/LifeSimulator';
+import AbstractSimulator from './simulation/AbstractSimulator';
+import State, { InitialStateData } from './simulation/State';
 
-export { rules as lifeSimulatorRules }  from './simulation/LifeSimulator';
+export {
+  LifeSimulator,
+  AbstractSimulator,
+  State,
+  InitialStateData,
+  lifeSimulatorRules,
+};
