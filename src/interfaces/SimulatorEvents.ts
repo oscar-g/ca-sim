@@ -6,11 +6,7 @@ import Location from './Location';
 export default interface SimulatorEvents {
   beforeTurn: State;
   afterTurn: State;
-  applyRule: {
-    loc: Location,
-    before: State,
-    after: State,
-  };
+  applyRule: Location;
 }
 
 export type EventService = NanoEvents<SimulatorEvents>;
