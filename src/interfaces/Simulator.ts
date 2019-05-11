@@ -11,12 +11,12 @@ interface Simulator {
   /**
    * Run the simulation until complete.
    */
-  run(): this;
+  run(): Promise<this>;
 
   /**
    * Run the simulation for a single turn.
    */
-  turn(): this;
+  turn(): Promise<void>;
 
   /**
    * Check if the simulation is complete.
@@ -27,7 +27,7 @@ interface Simulator {
    * Apply the automata rules at the specified location and return the resulting cell.
    * @param loc
    */
-  applyRules(loc: Location): Cell;
+  applyRules(loc: Location): Promise<Cell>;
 
   // hooks
   beforeTurn(): this;

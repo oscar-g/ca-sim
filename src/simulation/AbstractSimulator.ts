@@ -13,34 +13,33 @@ export default abstract class AbstractSimulator implements Simulator {
     this.state = new State(initialData);
   }
 
-  run() {
-    while (!this.isSimComplete()) {
-      this.beforeTurn();
-      this.turn();
-      this.afterTurn();
+  run(): Promise<this> {
+    if (this.isSimComplete()) {
+      return Promise.resolve(this);
     }
 
-    this.afterComplete();
-
-    return this;
+    return this.turn()
+      .then(() => this.run());
   }
 
   // apply the sim rules at each location
   // set the new state
-  turn(): this {
-    const newStateCells: Cell[] = [];
+  turn() {
+    const p: Promise<Cell>[] = [];
 
-    // @todo dynamic size
-    for (let y = 0; y < this.state.initialData.length; y++) {
-      for (let x = 0; x < this.state.initialData.length; x++) {
-        newStateCells.push(this.applyRules({ x, y }));
+    /** @todo dynamic size */
+    for (let y = 0; y < this.state.getDataSize('y'); y++) {
+      for (let x = 0; x < this.state.getDataSize('x'); x++) {
+        p.push(this.applyRules({ x, y }));
       }
     }
 
-    // @todo keep track of old locations
-    this.state.setNextTurnCells(newStateCells);
+    return Promise.all(p).then((newStateCells) => {
+      /** @todo keep track of old locations */
+      this.state.setNextTurnCells(newStateCells);
 
-    return this;
+      return;
+    });
   }
 
   isSimComplete() {
@@ -59,5 +58,5 @@ export default abstract class AbstractSimulator implements Simulator {
     return this;
   }
 
-  abstract applyRules(loc: Location): Cell;
+  abstract applyRules(loc: Location): Promise<Cell>;
 }

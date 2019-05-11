@@ -1,4 +1,4 @@
-import * as QuadTree from 'quadtree-lib';
+import QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
 
 // tslint:disable-next-line:import-name
@@ -6,9 +6,13 @@ import IState, { InitialStateData } from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
 
-/** @todo support growing data size */
+/**
+ * @todo support growing data size
+ * @todo remove assumptions on data size
+ * */
 class State implements IState {
   turn: number = 0;
+  /** @todo use service with pluginable data type (ie. to use something other than quadtree) */
   data: QuadTree<Cell>;
 
   constructor(public initialData: InitialStateData) {
@@ -125,7 +129,19 @@ class State implements IState {
    * Return list of living cells in neighborhood centered at loc.
    */
   getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
-    return this.getNeighborhood(loc, size).find(_ => _.state === 1);
+    return this.getNeighborhood(loc, size).find((_: Cell) => _.state === 1);
+  }
+
+  /**
+   * @todo support dynamic size
+   */
+  getDataSize(dimension?: string): number {
+    switch (dimension) {
+      case 'x':
+      case 'y':
+      default:
+        return this.initialData.length;
+    }
   }
 
   /**

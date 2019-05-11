@@ -10,7 +10,6 @@ import Location from './Location';
  * Input data is 2-dimensional array of 0|1
  * Uses QuadTree to represent input data internally.
  */
-
 export type InitialStateData = Cell['state'][][];
 
 interface State {
@@ -18,11 +17,12 @@ interface State {
   data: QuadTree<Cell>;
   initialData: InitialStateData;
 
-  exportData(): State['initialData'];
+  exportData(): InitialStateData;
 
   setData(cell: Cell): this;
   delData(loc: Location): this;
   getData(loc: Location): Option<Cell>;
+  getDataSize(dimension?: string): number;
   setNextTurnCells(data: Cell[]): this;
 
   getNeighborhood(loc: Location, size: number): QuadTree<Cell>;

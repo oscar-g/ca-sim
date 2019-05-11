@@ -1,6 +1,7 @@
 import LifeSimulator, { rules as lifeSimulatorRules } from './simulation/LifeSimulator';
 import AbstractSimulator from './simulation/AbstractSimulator';
-import State, { InitialStateData } from './simulation/State';
+import State from './simulation/State';
+import { InitialStateData } from './interfaces/State';
 
 export {
   LifeSimulator,

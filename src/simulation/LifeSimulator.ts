@@ -16,8 +16,9 @@ class LifeSimulator extends AbstractSimulator {
    *
    * Counts the surviving neighbors and compares with LifeRule
    * @todo track cell state transition
+   * @todo optimize rule calculation
    */
-  applyRules(loc: Location): Cell {
+  applyRules(loc: Location) {
     const livingNeighbors = this.state
       .getLivingNeighbors(loc, this.config.neighborhoodSize)
       // remove the current cell from the neighbor count
@@ -43,15 +44,15 @@ class LifeSimulator extends AbstractSimulator {
       newState = 1;
     }
 
-    return {
+    return Promise.resolve({
       ...loc,
       state: newState,
-    };
+    });
   }
 }
 
 // @todo add other common rules
-const rules: { [k: string]: LifeRule } = {
+const rules: { [x: string]: LifeRule } = {
   conway: {
     born: [3],
     survive: [3, 2],
