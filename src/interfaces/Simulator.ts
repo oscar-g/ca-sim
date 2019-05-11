@@ -28,11 +28,6 @@ interface Simulator {
    * @param loc
    */
   applyRules(loc: Location): Promise<Cell>;
-
-  // hooks
-  beforeTurn(): this;
-  afterTurn(): this;
-  afterComplete(): this;
 }
 
 export default Simulator;

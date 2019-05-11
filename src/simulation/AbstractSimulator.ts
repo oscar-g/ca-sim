@@ -1,3 +1,4 @@
+import NanoEvents from 'nanoevents';
 
 import Config from './../interfaces/Config';
 import State from './State';
@@ -5,12 +6,19 @@ import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
 import Simulator from './../interfaces/Simulator';
 import { InitialStateData } from '../interfaces/State';
+import SimulatorEvent from '../interfaces/SimulatorEvent';
 
 export default abstract class AbstractSimulator implements Simulator {
-  state: State;
+  public state: State;
+
+  private eventService: NanoEvents<SimulatorEvent>;
+  public on: NanoEvents<SimulatorEvent>['on'];
 
   constructor(public config: Config, initialData: InitialStateData) {
     this.state = new State(initialData);
+
+    this.eventService = new NanoEvents<SimulatorEvent>();
+    this.on = this.eventService.on;
   }
 
   run(): Promise<this> {
@@ -44,18 +52,6 @@ export default abstract class AbstractSimulator implements Simulator {
 
   isSimComplete() {
     return this.state.turn >= this.config.maxTurns;
-  }
-
-  beforeTurn(): this {
-    return this;
-  }
-
-  afterTurn(): this {
-    return this;
-  }
-
-  afterComplete(): this {
-    return this;
   }
 
   abstract applyRules(loc: Location): Promise<Cell>;

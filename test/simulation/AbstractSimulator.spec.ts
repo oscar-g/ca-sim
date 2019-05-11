@@ -22,18 +22,15 @@ const testData: InitialStateData = [[0, 1], [0, 1]];
 
 describe('AbstractSimulator', () => {
   describe('instance', () => {
-    let sim = undefined;
+    let sim: TestAbstractSimulator;
 
     beforeEach(() => {
       sim = new TestAbstractSimulator(simConf, testData);
     });
-    afterEach(() => {
-      sim = undefined;
-    });
 
     it('provides an event emmiter', () => {
       expect(sim).haveOwnProperty('on');
-      expect(sim.on).be('Function', 'Must be a function');
+      expect(typeof sim.on).eq('function');
     });
   });
 
@@ -45,7 +42,7 @@ describe('AbstractSimulator', () => {
 
   describe('run()', () => {
     describe('first call', () => {
-      it('runs until the maximum number of turns', done => {
+      it('runs until the maximum number of turns', (done) => {
         const sim = new TestAbstractSimulator(simConf, testData);
 
         expect(sim.state.turn).eq(0);
