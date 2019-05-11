@@ -1,4 +1,6 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
+
 import AbstractSimulator from '../../src/simulation/AbstractSimulator';
 import Cell from '../../src/interfaces/Cell';
 import Location from '../../src/interfaces/Location';
@@ -35,9 +37,45 @@ describe('AbstractSimulator', () => {
   });
 
   describe('turn()', () => {
-    it('applies the simulation rule, at every cell');
-    it('sets the new state');
-    it('increases the turn by one');
+    let sim: TestAbstractSimulator;
+
+    beforeEach(() => {
+      sim = new TestAbstractSimulator(simConf, testData);
+    });
+
+    it('emits an event before doing anything', (done) => {
+      const fake = sinon.fake();
+      sim.on('beforeTurn', fake);
+      sim.on('beforeTurn', state => expect(state.turn).eq(0));
+
+      sim.turn().then(() => {
+        expect(fake.calledOnce).eq(true);
+
+        done();
+      }).catch(done);
+    });
+    it('emits an event after applying a simulation rule on a single cell', (done) => {
+      const fake = sinon.fake();
+      sim.on('applyRule', fake);
+
+      sim.turn()
+        .then(() => {
+          expect(fake.getCalls().length).eq(4);
+          done();
+        }).catch(done);
+    });
+    it('emits an event after applying all rules and setting the new state', (done) => {
+      const fake = sinon.fake();
+      sim.on('afterTurn', fake);
+
+      sim.turn()
+        .then(() => {
+          expect(fake.calledOnce).eq(true);
+          expect(fake.calledWith(sim.state)).eq(true);
+
+          done();
+        }).catch(done);
+    });
   });
 
   describe('run()', () => {
