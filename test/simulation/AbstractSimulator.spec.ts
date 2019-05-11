@@ -5,6 +5,9 @@ import Location from '../../src/interfaces/Location';
 import Config from '../../src/interfaces/Config';
 import { InitialStateData } from '../../src/interfaces/State';
 
+/**
+ * bare-bones no-op simulator
+ */
 class TestAbstractSimulator extends AbstractSimulator {
   applyRules(loc: Location) {
     return Promise.resolve({
@@ -18,6 +21,22 @@ const simConf: Config = { maxTurns: 10, neighborhoodSize: 3 };
 const testData: InitialStateData = [[0, 1], [0, 1]];
 
 describe('AbstractSimulator', () => {
+  describe('instance', () => {
+    let sim = undefined;
+
+    beforeEach(() => {
+      sim = new TestAbstractSimulator(simConf, testData);
+    });
+    afterEach(() => {
+      sim = undefined;
+    });
+
+    it('provides an event emmiter', () => {
+      expect(sim).haveOwnProperty('on');
+      expect(sim.on).be('Function', 'Must be a function');
+    });
+  });
+
   describe('turn()', () => {
     it('applies the simulation rule, at every cell');
     it('sets the new state');
