@@ -1,4 +1,3 @@
-
 import Config from './Config';
 import Location from './Location';
 import Cell from './Cell';

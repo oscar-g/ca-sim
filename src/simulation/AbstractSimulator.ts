@@ -6,19 +6,19 @@ import Location from './../interfaces/Location';
 import Cell from '../interfaces/Cell';
 import Simulator from './../interfaces/Simulator';
 import { InitialStateData } from '../interfaces/State';
-import SimulatorEvent from '../interfaces/SimulatorEvent';
+import { EventService } from '../interfaces/SimulatorEvents';
 
 export default abstract class AbstractSimulator implements Simulator {
   public state: State;
 
-  private eventService: NanoEvents<SimulatorEvent>;
-  public on: NanoEvents<SimulatorEvent>['on'];
+  private eventService: EventService;
+  public on: EventService['on'];
 
   constructor(public config: Config, initialData: InitialStateData) {
     this.state = new State(initialData);
 
-    this.eventService = new NanoEvents<SimulatorEvent>();
-    this.on = this.eventService.on;
+    this.eventService = new NanoEvents();
+    this.on = this.eventService.on.bind(this.eventService);
   }
 
   run(): Promise<this> {
