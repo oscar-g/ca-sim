@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "ts-mocha -p test/tsconfig.json test/**/*.spec.ts",
-    "lint": "tslint --fix --project ./",
+    "lint": "tslint --fix -p ./ && tslint --fix -p ./test/ -c ./tslint.json",
     "build": "rm -rf dist && tsc"
   },
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",

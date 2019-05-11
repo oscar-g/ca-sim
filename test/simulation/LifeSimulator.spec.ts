@@ -75,7 +75,7 @@ describe('LifeSimulator', () => {
             expect(data.length).eq(0, `Expected dead cell at x=${x},y=${y}`);
           });
 
-          done()
+          done();
         });
 
       });

@@ -1,7 +1,6 @@
+// tslint:disable:import-name
 import QuadTree from 'quadtree-lib';
 import { Option, none, some } from 'ts-option';
-
-// tslint:disable-next-line:import-name
 import IState, { InitialStateData } from '../interfaces/State';
 import Cell from '../interfaces/Cell';
 import Location from '../interfaces/Location';
