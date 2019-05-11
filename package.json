@@ -1,11 +1,11 @@
 {
-  "name": "ca-sim",
+  "name": "@oscar-g/ca-sim",
   "version": "1.0.0",
-  "description": "A runner for 2D cell automata.",
+  "description": "A runner for 2D cell automata",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "ts-mocha test/**/*.spec.ts",
+    "test": "ts-mocha -p test/tsconfig.json test/**/*.spec.ts",
     "lint": "tslint --fix --project ./",
     "build": "rm -rf dist && tsc"
   },
@@ -16,13 +16,13 @@
     "ts-option": "^1.1.5"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/mocha": "^5.2.5",
-    "chai": "^4.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "ts-mocha": "^2.0.0",
-    "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.11.0",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
     "typescript": "^2.9.2"
   },
   "files": [
