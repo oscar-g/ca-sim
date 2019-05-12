@@ -1,7 +1,9 @@
 {
-    "extends": "tslint-config-airbnb",
+    "extends": ["tslint-microsoft-contrib/recommended"],
     "rules": {
+        "no-relative-imports": false,
         "import-name": false,
+        "export-name": false,
         "interface-name": false,
         "no-increment-decrement": false
     }

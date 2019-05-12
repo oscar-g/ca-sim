@@ -37,7 +37,9 @@ export default abstract class AbstractSimulator implements Simulator {
 
     this.eventService.emit('beforeTurn', this.state);
 
-    /** @todo dynamic size */
+    /**
+     * @todo dynamic size
+     */
     for (let y = 0; y < this.state.getDataSize('y'); y++) {
       for (let x = 0; x < this.state.getDataSize('x'); x++) {
         p.push(this.applyRules({ x, y }));
@@ -46,7 +48,9 @@ export default abstract class AbstractSimulator implements Simulator {
     }
 
     return Promise.all(p).then((newStateCells) => {
-      /** @todo keep track of old locations */
+      /**
+       * @todo keep track of old locations
+       */
       this.state.setNextTurnCells(newStateCells);
       this.eventService.emit('afterTurn', this.state);
 

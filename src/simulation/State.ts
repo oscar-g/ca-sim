@@ -11,7 +11,11 @@ import Location from '../interfaces/Location';
  * */
 class State implements IState {
   turn: number = 0;
-  /** @todo use service with pluginable data type (ie. to use something other than quadtree) */
+  /**
+   * @todo use service with pluginable data type
+   * 
+   * in order to use something other than quadtree, if desired
+   */
   data: QuadTree<Cell>;
 
   constructor(public initialData: InitialStateData) {
@@ -27,7 +31,7 @@ class State implements IState {
           // populate live cells only
           this.setData({
             x, y,
-            state: state as Cell['state'],
+            state: <Cell['state']>state,
           });
         }
       });
