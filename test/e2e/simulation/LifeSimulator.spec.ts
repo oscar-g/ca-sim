@@ -1,8 +1,8 @@
 // tslint:disable: max-line-length
 import { expect } from 'chai';
-import LifeSimulator, { rules } from './../../src/simulation/LifeSimulator';
-import LifeConfig from '../../src/interfaces/LifeConfig';
-import Location from '../../src/interfaces/Location';
+import LifeSimulator, { rules } from '../../../src/simulation/LifeSimulator';
+import LifeConfig from '../../../src/interfaces/LifeConfig';
+import Location from '../../../src/interfaces/Location';
 
 describe('LifeSimulator', () => {
   describe('applyRules()', () => {

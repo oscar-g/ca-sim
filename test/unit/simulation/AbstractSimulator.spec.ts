@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import AbstractSimulator from '../../src/simulation/AbstractSimulator';
-import Cell from '../../src/interfaces/Cell';
-import Location from '../../src/interfaces/Location';
-import Config from '../../src/interfaces/Config';
-import { InitialStateData } from '../../src/interfaces/State';
+import AbstractSimulator from '../../../src/simulation/AbstractSimulator';
+import Cell from '../../../src/interfaces/Cell';
+import Location from '../../../src/interfaces/Location';
+import Config from '../../../src/interfaces/Config';
+import { InitialStateData } from '../../../src/interfaces/State';
 
 /**
  * bare-bones no-op simulator

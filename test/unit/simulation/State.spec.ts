@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import State from '../../src/simulation/State';
-import { InitialStateData } from '../../src/interfaces/State';
+import State from '../../../src/simulation/State';
+import { InitialStateData } from '../../../src/interfaces/State';
 
 describe('State', () => {
   describe('setData()', () => {
