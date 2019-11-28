@@ -162,6 +162,33 @@ class State implements IState {
       [loc.x - half, loc.x + half],
     ];
   }
+
+  static generateRandomIndividual(chrSize: number): InitialStateData {
+    const genome: (0|1)[][] = [];
+
+    for (let chrNum = 0; chrNum < chrSize; chrNum++) {
+      const code: (0|1)[] = [];
+
+      for (let baseNum = 0; baseNum < chrSize; baseNum++) {
+        code[baseNum] = Math.round(Math.random()) as (0|1);
+      }
+
+      genome.push(code);
+    }
+
+    // @todo track unique genomes (ie md5(genome) suffix)
+    return genome;
+  }
+
+  static generatePopulation(popSize: number, chrSize: number): InitialStateData[] {
+    const p: InitialStateData[] = [];
+
+    for (let i = popSize; i > 0; i--) {
+      p.push(State.generateRandomIndividual(chrSize));
+    }
+
+    return p;
+  }
 }
 
 export default State;
