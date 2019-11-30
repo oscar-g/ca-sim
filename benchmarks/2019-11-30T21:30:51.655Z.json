@@ -1,0 +1,941 @@
+{
+  "config": {
+    "experimentSize": 100,
+    "dataSize": 50
+  },
+  "simulator": "Life Simulator",
+  "simulatorConfig": {
+    "rule": {
+      "born": [
+        3
+      ],
+      "survive": [
+        3,
+        2
+      ]
+    },
+    "maxTurns": 10,
+    "neighborhoodSize": 3
+  },
+  "results": [
+    {
+      "event": "t0",
+      "tLoc": "Sat, 30 Nov 2019 21:30:51 GMT",
+      "t": 1575149451655,
+      "dt": 0
+    },
+    {
+      "event": "initial-data",
+      "tLoc": "Sat, 30 Nov 2019 21:30:51 GMT",
+      "t": 1575149451684,
+      "dt": 29
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488936,
+      "dt": 37281,
+      "sampleNumber": 0,
+      "initialDensity": 1225,
+      "finalDensity": 965
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488949,
+      "dt": 37294,
+      "sampleNumber": 1,
+      "initialDensity": 1247,
+      "finalDensity": 982
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488962,
+      "dt": 37307,
+      "sampleNumber": 2,
+      "initialDensity": 1264,
+      "finalDensity": 936
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488964,
+      "dt": 37309,
+      "sampleNumber": 3,
+      "initialDensity": 1276,
+      "finalDensity": 999
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488965,
+      "dt": 37310,
+      "sampleNumber": 4,
+      "initialDensity": 1236,
+      "finalDensity": 1014
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488967,
+      "dt": 37312,
+      "sampleNumber": 5,
+      "initialDensity": 1263,
+      "finalDensity": 928
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488969,
+      "dt": 37314,
+      "sampleNumber": 6,
+      "initialDensity": 1314,
+      "finalDensity": 918
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488970,
+      "dt": 37315,
+      "sampleNumber": 7,
+      "initialDensity": 1260,
+      "finalDensity": 968
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488972,
+      "dt": 37317,
+      "sampleNumber": 8,
+      "initialDensity": 1259,
+      "finalDensity": 948
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488973,
+      "dt": 37318,
+      "sampleNumber": 9,
+      "initialDensity": 1258,
+      "finalDensity": 894
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488975,
+      "dt": 37320,
+      "sampleNumber": 10,
+      "initialDensity": 1271,
+      "finalDensity": 948
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488976,
+      "dt": 37321,
+      "sampleNumber": 11,
+      "initialDensity": 1256,
+      "finalDensity": 967
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488978,
+      "dt": 37323,
+      "sampleNumber": 12,
+      "initialDensity": 1252,
+      "finalDensity": 885
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488979,
+      "dt": 37324,
+      "sampleNumber": 13,
+      "initialDensity": 1264,
+      "finalDensity": 971
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488981,
+      "dt": 37326,
+      "sampleNumber": 14,
+      "initialDensity": 1231,
+      "finalDensity": 956
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488982,
+      "dt": 37327,
+      "sampleNumber": 15,
+      "initialDensity": 1239,
+      "finalDensity": 943
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488984,
+      "dt": 37329,
+      "sampleNumber": 16,
+      "initialDensity": 1233,
+      "finalDensity": 981
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488985,
+      "dt": 37330,
+      "sampleNumber": 17,
+      "initialDensity": 1232,
+      "finalDensity": 1013
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488986,
+      "dt": 37331,
+      "sampleNumber": 18,
+      "initialDensity": 1246,
+      "finalDensity": 961
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488988,
+      "dt": 37333,
+      "sampleNumber": 19,
+      "initialDensity": 1233,
+      "finalDensity": 962
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488991,
+      "dt": 37336,
+      "sampleNumber": 20,
+      "initialDensity": 1347,
+      "finalDensity": 985
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488993,
+      "dt": 37338,
+      "sampleNumber": 21,
+      "initialDensity": 1233,
+      "finalDensity": 950
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488994,
+      "dt": 37339,
+      "sampleNumber": 22,
+      "initialDensity": 1289,
+      "finalDensity": 942
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488996,
+      "dt": 37341,
+      "sampleNumber": 23,
+      "initialDensity": 1247,
+      "finalDensity": 965
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488997,
+      "dt": 37342,
+      "sampleNumber": 24,
+      "initialDensity": 1231,
+      "finalDensity": 1018
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:28 GMT",
+      "t": 1575149488999,
+      "dt": 37344,
+      "sampleNumber": 25,
+      "initialDensity": 1278,
+      "finalDensity": 955
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489000,
+      "dt": 37345,
+      "sampleNumber": 26,
+      "initialDensity": 1249,
+      "finalDensity": 938
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489002,
+      "dt": 37347,
+      "sampleNumber": 27,
+      "initialDensity": 1244,
+      "finalDensity": 921
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489003,
+      "dt": 37348,
+      "sampleNumber": 28,
+      "initialDensity": 1233,
+      "finalDensity": 1021
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489005,
+      "dt": 37350,
+      "sampleNumber": 29,
+      "initialDensity": 1244,
+      "finalDensity": 935
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489006,
+      "dt": 37351,
+      "sampleNumber": 30,
+      "initialDensity": 1253,
+      "finalDensity": 996
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489008,
+      "dt": 37353,
+      "sampleNumber": 31,
+      "initialDensity": 1275,
+      "finalDensity": 960
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489009,
+      "dt": 37354,
+      "sampleNumber": 32,
+      "initialDensity": 1242,
+      "finalDensity": 965
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489010,
+      "dt": 37355,
+      "sampleNumber": 33,
+      "initialDensity": 1227,
+      "finalDensity": 918
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489012,
+      "dt": 37357,
+      "sampleNumber": 34,
+      "initialDensity": 1255,
+      "finalDensity": 989
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489013,
+      "dt": 37358,
+      "sampleNumber": 35,
+      "initialDensity": 1266,
+      "finalDensity": 903
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489015,
+      "dt": 37360,
+      "sampleNumber": 36,
+      "initialDensity": 1306,
+      "finalDensity": 972
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489016,
+      "dt": 37361,
+      "sampleNumber": 37,
+      "initialDensity": 1226,
+      "finalDensity": 982
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489018,
+      "dt": 37363,
+      "sampleNumber": 38,
+      "initialDensity": 1281,
+      "finalDensity": 998
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489019,
+      "dt": 37364,
+      "sampleNumber": 39,
+      "initialDensity": 1252,
+      "finalDensity": 928
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489021,
+      "dt": 37366,
+      "sampleNumber": 40,
+      "initialDensity": 1275,
+      "finalDensity": 803
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489022,
+      "dt": 37367,
+      "sampleNumber": 41,
+      "initialDensity": 1235,
+      "finalDensity": 990
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489025,
+      "dt": 37370,
+      "sampleNumber": 42,
+      "initialDensity": 1270,
+      "finalDensity": 953
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489026,
+      "dt": 37371,
+      "sampleNumber": 43,
+      "initialDensity": 1215,
+      "finalDensity": 999
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489028,
+      "dt": 37373,
+      "sampleNumber": 44,
+      "initialDensity": 1241,
+      "finalDensity": 964
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489029,
+      "dt": 37374,
+      "sampleNumber": 45,
+      "initialDensity": 1238,
+      "finalDensity": 935
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489031,
+      "dt": 37376,
+      "sampleNumber": 46,
+      "initialDensity": 1237,
+      "finalDensity": 891
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489032,
+      "dt": 37377,
+      "sampleNumber": 47,
+      "initialDensity": 1264,
+      "finalDensity": 999
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489033,
+      "dt": 37378,
+      "sampleNumber": 48,
+      "initialDensity": 1228,
+      "finalDensity": 880
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489035,
+      "dt": 37380,
+      "sampleNumber": 49,
+      "initialDensity": 1250,
+      "finalDensity": 893
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489036,
+      "dt": 37381,
+      "sampleNumber": 50,
+      "initialDensity": 1215,
+      "finalDensity": 1005
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489038,
+      "dt": 37383,
+      "sampleNumber": 51,
+      "initialDensity": 1227,
+      "finalDensity": 996
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489039,
+      "dt": 37384,
+      "sampleNumber": 52,
+      "initialDensity": 1263,
+      "finalDensity": 930
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489041,
+      "dt": 37386,
+      "sampleNumber": 53,
+      "initialDensity": 1249,
+      "finalDensity": 981
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489042,
+      "dt": 37387,
+      "sampleNumber": 54,
+      "initialDensity": 1291,
+      "finalDensity": 1013
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489044,
+      "dt": 37389,
+      "sampleNumber": 55,
+      "initialDensity": 1306,
+      "finalDensity": 925
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489045,
+      "dt": 37390,
+      "sampleNumber": 56,
+      "initialDensity": 1285,
+      "finalDensity": 904
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489047,
+      "dt": 37392,
+      "sampleNumber": 57,
+      "initialDensity": 1275,
+      "finalDensity": 925
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489049,
+      "dt": 37394,
+      "sampleNumber": 58,
+      "initialDensity": 1248,
+      "finalDensity": 947
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489051,
+      "dt": 37396,
+      "sampleNumber": 59,
+      "initialDensity": 1263,
+      "finalDensity": 923
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489052,
+      "dt": 37397,
+      "sampleNumber": 60,
+      "initialDensity": 1214,
+      "finalDensity": 989
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489054,
+      "dt": 37399,
+      "sampleNumber": 61,
+      "initialDensity": 1243,
+      "finalDensity": 982
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489055,
+      "dt": 37400,
+      "sampleNumber": 62,
+      "initialDensity": 1241,
+      "finalDensity": 975
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489056,
+      "dt": 37401,
+      "sampleNumber": 63,
+      "initialDensity": 1247,
+      "finalDensity": 930
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489058,
+      "dt": 37403,
+      "sampleNumber": 64,
+      "initialDensity": 1236,
+      "finalDensity": 945
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489061,
+      "dt": 37406,
+      "sampleNumber": 65,
+      "initialDensity": 1188,
+      "finalDensity": 944
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489062,
+      "dt": 37407,
+      "sampleNumber": 66,
+      "initialDensity": 1236,
+      "finalDensity": 936
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489064,
+      "dt": 37409,
+      "sampleNumber": 67,
+      "initialDensity": 1206,
+      "finalDensity": 862
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489065,
+      "dt": 37410,
+      "sampleNumber": 68,
+      "initialDensity": 1254,
+      "finalDensity": 988
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489067,
+      "dt": 37412,
+      "sampleNumber": 69,
+      "initialDensity": 1300,
+      "finalDensity": 951
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489068,
+      "dt": 37413,
+      "sampleNumber": 70,
+      "initialDensity": 1269,
+      "finalDensity": 963
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489070,
+      "dt": 37415,
+      "sampleNumber": 71,
+      "initialDensity": 1222,
+      "finalDensity": 998
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489071,
+      "dt": 37416,
+      "sampleNumber": 72,
+      "initialDensity": 1275,
+      "finalDensity": 917
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489073,
+      "dt": 37418,
+      "sampleNumber": 73,
+      "initialDensity": 1231,
+      "finalDensity": 930
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489074,
+      "dt": 37419,
+      "sampleNumber": 74,
+      "initialDensity": 1219,
+      "finalDensity": 952
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489075,
+      "dt": 37420,
+      "sampleNumber": 75,
+      "initialDensity": 1265,
+      "finalDensity": 968
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489077,
+      "dt": 37422,
+      "sampleNumber": 76,
+      "initialDensity": 1248,
+      "finalDensity": 896
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489078,
+      "dt": 37423,
+      "sampleNumber": 77,
+      "initialDensity": 1228,
+      "finalDensity": 961
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489080,
+      "dt": 37425,
+      "sampleNumber": 78,
+      "initialDensity": 1240,
+      "finalDensity": 988
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489081,
+      "dt": 37426,
+      "sampleNumber": 79,
+      "initialDensity": 1268,
+      "finalDensity": 936
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489083,
+      "dt": 37428,
+      "sampleNumber": 80,
+      "initialDensity": 1227,
+      "finalDensity": 1075
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489084,
+      "dt": 37429,
+      "sampleNumber": 81,
+      "initialDensity": 1258,
+      "finalDensity": 881
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489086,
+      "dt": 37431,
+      "sampleNumber": 82,
+      "initialDensity": 1242,
+      "finalDensity": 940
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489087,
+      "dt": 37432,
+      "sampleNumber": 83,
+      "initialDensity": 1245,
+      "finalDensity": 902
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489089,
+      "dt": 37434,
+      "sampleNumber": 84,
+      "initialDensity": 1262,
+      "finalDensity": 880
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489090,
+      "dt": 37435,
+      "sampleNumber": 85,
+      "initialDensity": 1243,
+      "finalDensity": 977
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489092,
+      "dt": 37437,
+      "sampleNumber": 86,
+      "initialDensity": 1274,
+      "finalDensity": 937
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489094,
+      "dt": 37439,
+      "sampleNumber": 87,
+      "initialDensity": 1261,
+      "finalDensity": 993
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489096,
+      "dt": 37441,
+      "sampleNumber": 88,
+      "initialDensity": 1231,
+      "finalDensity": 942
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489097,
+      "dt": 37442,
+      "sampleNumber": 89,
+      "initialDensity": 1282,
+      "finalDensity": 970
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489099,
+      "dt": 37444,
+      "sampleNumber": 90,
+      "initialDensity": 1192,
+      "finalDensity": 1013
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489100,
+      "dt": 37445,
+      "sampleNumber": 91,
+      "initialDensity": 1223,
+      "finalDensity": 950
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489101,
+      "dt": 37446,
+      "sampleNumber": 92,
+      "initialDensity": 1240,
+      "finalDensity": 987
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489103,
+      "dt": 37448,
+      "sampleNumber": 93,
+      "initialDensity": 1235,
+      "finalDensity": 983
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489104,
+      "dt": 37449,
+      "sampleNumber": 94,
+      "initialDensity": 1261,
+      "finalDensity": 894
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489106,
+      "dt": 37451,
+      "sampleNumber": 95,
+      "initialDensity": 1256,
+      "finalDensity": 882
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489107,
+      "dt": 37452,
+      "sampleNumber": 96,
+      "initialDensity": 1249,
+      "finalDensity": 962
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489109,
+      "dt": 37454,
+      "sampleNumber": 97,
+      "initialDensity": 1246,
+      "finalDensity": 948
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489111,
+      "dt": 37456,
+      "sampleNumber": 98,
+      "initialDensity": 1219,
+      "finalDensity": 995
+    },
+    {
+      "event": "sample",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489112,
+      "dt": 37457,
+      "sampleNumber": 99,
+      "initialDensity": 1212,
+      "finalDensity": 936
+    },
+    {
+      "event": "t_end",
+      "tLoc": "Sat, 30 Nov 2019 21:31:29 GMT",
+      "t": 1575149489112,
+      "dt": 37457,
+      "dtAvg": 37380.52
+    }
+  ]
+}
