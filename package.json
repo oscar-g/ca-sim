@@ -7,6 +7,7 @@
   "scripts": {
     "test": "ts-mocha -p test/tsconfig.json test/**/*.spec.ts",
     "lint": "tslint --fix -p ./ && tslint --fix -p ./test/ -c ./tslint.json",
+    "benchmark": "node ./test/benchmark",
     "build": "rm -rf dist && tsc"
   },
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
@@ -17,20 +18,28 @@
     "ts-option": "^1.1.5"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.6",
+    "@types/chai": "^4.2.5",
+    "@types/lodash": "^4.14.149",
+    "@types/mocha": "^5.2.7",
     "@types/nanoevents": "^1.0.0",
-    "@types/sinon": "^7.0.11",
+    "@types/node": "^12.12.14",
+    "@types/sinon": "^7.5.1",
     "chai": "^4.2.0",
+    "cz-conventional-changelog": "^3.0.2",
     "mocha": "^5.2.0",
-    "sinon": "^7.3.2",
+    "sinon": "^7.5.0",
     "ts-mocha": "^2.0.0",
-    "tslint": "^5.16.0",
-    "tslint-microsoft-contrib": "^6.1.1",
+    "tslint": "^5.20.1",
+    "tslint-microsoft-contrib": "^6.2.0",
     "typescript": "^2.9.2"
   },
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
