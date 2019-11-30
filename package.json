@@ -14,7 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "nanoevents": "^1.0.8",
-    "quadtree-lib": "^1.0.9",
     "ts-option": "^1.1.5"
   },
   "devDependencies": {
