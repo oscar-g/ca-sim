@@ -1,142 +1,114 @@
 import { expect } from 'chai';
 
 import State from '../../../src/simulation/State';
-import { InitialStateData } from '../../../src/interfaces/State';
+
+const getState = () => new State(new Uint8Array([0, 1, 1, 0]), 2)
 
 describe('State', () => {
   describe('setData()', () => {
     it('updates live cells', () => {
-      const state = new State([
-        [0, 1],
-        [1, 0],
-      ]);
+      const state = getState()
 
       // turn off
       state.setData({
         x: 1,
         y: 0,
-        state: 0,
-      });
+      }, 0)
 
-      const testOpt = state.getData({ x: 1, y: 0 });
-      expect(testOpt.nonEmpty).true;
-      expect(testOpt.get.state).eq(0);
+
+      expect(state.getData({ x: 1, y: 0 })).eq(0, 'Value at (x=1, y=0) was not updated')
     });
 
-    it('sets data on dead cells', () => {
-      const state = new State([
-        [0, 1],
-        [1, 0],
-      ]);
+    it('updates dead cells', () => {
+      const state = getState()
 
-      // turn on a cell
+      // turn on
       state.setData({
         x: 0,
         y: 0,
-        state: 1,
-      });
+      }, 1);
 
-      const testOpt = state.getData({ x: 0, y: 0 });
-      expect(testOpt.nonEmpty).true;
-      expect(testOpt.get.state).eq(1);
+      expect(state.getData({ x: 0, y: 0 })).eq(1, 'Value at (x=0, y=0) was not updated')
     });
 
     it('implements toriodal data array', () => {
-      const initialState: InitialStateData = [
-        [0, 1],
-        [1, 0],
-      ];
-
       // turn on (NW corner)
       [
-        { x:2, y:2 },
-        { x:-2, y:-2 },
+        { x: 2, y: 2 },
+        { x: -2, y: -2 },
       ].forEach(loc => {
-        const state = new State(initialState);
-        state.setData({ ...loc, state: 1 });
-        const testOpt = state.getData({ x: 0, y: 0 });
-        expect(testOpt.nonEmpty).true;
-        expect(testOpt.get.state).eq(1);
+        const state = getState();
+
+        state.setData(loc, 1);
+
+        const testVal = state.getData({ x: 0, y: 0 });
+        expect(testVal).eq(1, `Unexpected value at (x=${0}, y=${0}) from update at (x=${loc.x}, y=${loc.y})`);
       });
 
       // turn on (SE corner)
       [
-        { x:3, y:3 },
-        { x:-3, y:-3 },
+        { x: 3, y: 3 },
+        { x: -3, y: -3 },
       ].forEach(loc => {
-        const state = new State(initialState);
-        state.setData({ ...loc, state: 1 });
-        const testOpt = state.getData({ x: 1, y: 1 });
-        expect(testOpt.nonEmpty, `x=${loc.x},y=${loc.y}`).true;
-        expect(testOpt.get.state).eq(1);
+        const state = getState();
+
+        state.setData(loc, 1);
+
+        const testVal = state.getData({ x: 1, y: 1 });
+        expect(testVal).eq(1, `Unexpected value at (x=${1}, y=${1}) from update at (x=${loc.x}, y=${loc.y})`);
       });
 
       // turn off (NE corner)
       [
-        { x:3, y: 2 },
-        { x:-3, y: -2 },
+        { x: 3, y: 2 },
+        { x: -3, y: -2 },
       ].forEach(loc => {
-        const state = new State(initialState);
-        state.setData({ ...loc, state: 0 });
-        const testOpt = state.getData({ x: 1, y: 0 });
-        expect(testOpt.nonEmpty).true;
-        expect(testOpt.get.state).eq(0);
+        const state = getState();
+
+        state.setData(loc, 0);
+
+        const testVal = state.getData({ x: 1, y: 0 });
+        expect(testVal).eq(0, `Unexpected value at (x=${1}, y=${0}) from update at (x=${loc.x}, y=${loc.y})`);
       });
 
       // turn off (SW corner)
       [
-        { x:2, y: 3 },
-        { x:-2, y: -3 },
+        { x: 2, y: 3 },
+        { x: -2, y: -3 },
       ].forEach(loc => {
-        const state = new State(initialState);
-        state.setData({ ...loc, state: 0 });
-        const testOpt = state.getData({ x: 0, y: 1 });
-        expect(testOpt.nonEmpty).true;
-        expect(testOpt.get.state).eq(0);
+        const state = getState();
+
+        state.setData(loc, 0);
+
+        const testVal = state.getData({ x: 0, y: 1 });
+        expect(testVal).eq(0, `Unexpected value at (x=${0}, y=${1}) from update at (x=${loc.x}, y=${loc.y})`);
       });
     });
   });
 
   describe('delData()', () => {
     it('removes data', () => {
-      const state = new State([
-        [0, 1],
-        [1, 0],
-      ]);
+      const state = getState()
 
       state.delData({ x: 1, y: 0 });
-      expect(state.getData({ x: 1, y: 0 }).isEmpty).true;
+
+      expect(state.getData({ x: 1, y: 0 })).eq(0, 'Expected dead cell at (x=1, y=0)');
     });
 
     it('implements toriodal data array', () => {
-      const initialState: InitialStateData = [
-        [0, 1],
-        [1, 0],
-      ];
+      const state = getState()
 
-      let state = new State(initialState);
       state.delData({ x: 3, y: 0 });
-      expect(state.getData({ x: 1, y: 0 }).isEmpty).true;
+      expect(state.getData({ x: 1, y: 0 })).eq(0, 'Expected dead cell at (x=1, y=0)')
 
       state.delData({ x: 0, y: 3 });
-      expect(state.getData({ x: 0, y: 1 }).isEmpty).true;
-
-      // test negative locations
-      state = new State(initialState);
-      state.delData({ x: -3, y: 0 });
-      expect(state.getData({ x: 1, y: 0 }).isEmpty).true;
-
-      state.delData({ x: 0, y: -3 });
-      expect(state.getData({ x: 0, y: 1 }).isEmpty).true;
+      expect(state.getData({ x: 0, y: 1 })).eq(0, 'Expected dead cell at (x=0, y=1)')
     });
   });
 
   describe('getData()', () => {
     it('returns the correct data', () => {
-      const state = new State([
-        [0, 1],
-        [1, 0],
-      ]);
+      const state = getState()
 
       const expectEmpty = [
         { x: 0, y: 0 },
@@ -149,22 +121,16 @@ describe('State', () => {
       ];
 
       expectEmpty.forEach((loc) => {
-        expect(state.getData(loc).isEmpty, `Expected empty option at x=${loc.x},y=${loc.y}`).true;
+        expect(state.getData(loc)).eq(0, `Expected dead cell at x=${loc.x},y=${loc.y}`)
       });
 
       expectFull.forEach((loc) => {
-        const data = state.getData(loc);
-        expect(data.isDefined, `Expected data at x=${loc.x},y=${loc.y}`).true;
-
-        expect(data.map(_ => _.state).getOrElse(0)).eq(1);
+        expect(state.getData(loc)).eq(1, `Expected live cell at x=${loc.x},y=${loc.y}`)
       });
     });
 
     it('implements toriodal data array', () => {
-      const state = new State([
-        [0, 1],
-        [1, 0],
-      ]);
+      const state = getState()
 
       const expectEmpty = [
         { x: 2, y: 0 },
@@ -183,14 +149,11 @@ describe('State', () => {
       ];
 
       expectEmpty.forEach((loc) => {
-        expect(state.getData(loc).isEmpty, `Expected empty option at x=${loc.x},y=${loc.y}`).true;
+        expect(state.getData(loc)).eq(0, `Expected empty cell at x=${loc.x},y=${loc.y}`)
       });
 
       expectFull.forEach((loc) => {
-        const data = state.getData(loc);
-        expect(data.isDefined, `Expected data at x=${loc.x},y=${loc.y}`).true;
-
-        expect(data.map(_ => _.state).getOrElse(0)).eq(1);
+        expect(state.getData(loc)).eq(1, `Expected live cell at x=${loc.x},y=${loc.y}`);
       });
     });
   });

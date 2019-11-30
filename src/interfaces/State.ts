@@ -1,7 +1,3 @@
-import * as QuadTree from 'quadtree-lib';
-import { Option } from 'ts-option';
-
-import Cell from './Cell';
 import Location from './Location';
 
 /**
@@ -10,23 +6,23 @@ import Location from './Location';
  * Input data is 2-dimensional array of 0|1
  * Uses QuadTree to represent input data internally.
  */
-export type InitialStateData = Cell['state'][][];
+export type StateData = Uint8Array;
+export type CellState = 0 | 1
 
 interface State {
   turn: number;
-  data: QuadTree<Cell>;
-  initialData: InitialStateData;
+  data: StateData;
+  dataWidth: number;
+  initialData: StateData;
 
-  exportData(): InitialStateData;
+  dataToString(data?: StateData): string;
 
-  setData(cell: Cell): this;
+  setData(loc: Location, state: CellState): this;
   delData(loc: Location): this;
-  getData(loc: Location): Option<Cell>;
+  getData(loc: Location): CellState
   getDataSize(dimension?: string): number;
-  setNextTurnCells(data: Cell[]): this;
 
-  getNeighborhood(loc: Location, size: number): QuadTree<Cell>;
-  getLivingNeighbors(loc: Location, size: number): Cell[];
+  getMooreNeighborhood(loc: Location, size: number): StateData;
 }
 
 export default State;

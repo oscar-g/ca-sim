@@ -1,12 +1,11 @@
 import NanoEvents from 'nanoevents';
 
-import State from './State';
 import Location from './Location';
 
 export default interface SimulatorEvents {
-  beforeTurn: State;
-  afterTurn: State;
-  applyRule: Location;
+  beforeTurn: void;
+  afterTurn: void;
+  applyRules: Location;
 }
 
 export type EventService = NanoEvents<SimulatorEvents>;

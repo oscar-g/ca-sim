@@ -1,7 +1,6 @@
 import Config from './Config';
 import Location from './Location';
-import Cell from './Cell';
-import State from './State';
+import State, { CellState } from './State';
 
 interface Simulator {
   config: Config;
@@ -23,10 +22,10 @@ interface Simulator {
   isSimComplete(): boolean;
 
   /**
-   * Apply the automata rules at the specified location and return the resulting cell.
+   * Apply the automata rules at the specified location and return the resulting cell state.
    * @param loc
    */
-  applyRules(loc: Location): Promise<Cell>;
+  applyRules(loc: Location): Promise<CellState>;
 }
 
 export default Simulator;

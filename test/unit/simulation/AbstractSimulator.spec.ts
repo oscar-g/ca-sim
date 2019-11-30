@@ -2,27 +2,27 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import AbstractSimulator from '../../../src/simulation/AbstractSimulator';
-import Cell from '../../../src/interfaces/Cell';
 import Location from '../../../src/interfaces/Location';
 import Config from '../../../src/interfaces/Config';
-import { InitialStateData } from '../../../src/interfaces/State';
+import { CellState, StateData } from '../../../src/interfaces/State';
 
 /**
  * bare-bones no-op simulator
  */
 class TestAbstractSimulator extends AbstractSimulator {
-  applyRules(loc: Location) {
-    return Promise.resolve({
-      ...loc,
-      state: 1,
-    } as Cell);
+  applyRules(_loc: Location): Promise<CellState> {
+    return Promise.resolve(1)
   }
 }
 
-const simConf: Config = { maxTurns: 10, neighborhoodSize: 3 };
-const testData: InitialStateData = [[0, 1], [0, 1]];
+const simConf: Config = { maxTurns: 10, neighborhoodSize: 3, dataWidth: 2 };
+// tslint:disable-next-line: mocha-no-side-effect-code
+const testData: StateData = Uint8Array.from([0, 1, 0, 1])
 
 describe('AbstractSimulator', () => {
+  before(() => {
+
+  })
   describe('instance', () => {
     let sim: TestAbstractSimulator;
 
@@ -46,21 +46,24 @@ describe('AbstractSimulator', () => {
     it('emits an event before doing anything', (done) => {
       const fake = sinon.fake();
       sim.on('beforeTurn', fake);
-      sim.on('beforeTurn', state => expect(state.turn).eq(0));
+      sim.on('beforeTurn', () => {
+        expect(sim.state.turn).eq(0, 'Unexepected value for initial state.turn')
+      });
 
       sim.turn().then(() => {
-        expect(fake.calledOnce).eq(true);
+        expect(fake.calledOnce).eq(true, 'Expected `turn` to be called only once');
 
         done();
       }).catch(done);
     });
     it('emits an event after applying a simulation rule on a single cell', (done) => {
       const fake = sinon.fake();
-      sim.on('applyRule', fake);
+
+      sim.on('applyRules', fake);
 
       sim.turn()
         .then(() => {
-          expect(fake.getCalls().length).eq(4);
+          expect(fake.getCalls().length).eq(4, 'Expected `applyRules` event to be fired 4 times');
           done();
         }).catch(done);
     });
@@ -70,8 +73,7 @@ describe('AbstractSimulator', () => {
 
       sim.turn()
         .then(() => {
-          expect(fake.calledOnce).eq(true);
-          expect(fake.calledWith(sim.state)).eq(true);
+          expect(fake.calledOnce).eq(true, 'Expected `afterTurn` event to be fired only once');
 
           done();
         }).catch(done);
@@ -103,7 +105,10 @@ describe('AbstractSimulator', () => {
             return sim.run();
           })
           .then(() => {
-            /** @todo test other properties of state to ensure no-op */
+            /**
+             * @todo test other properties of state to ensure no-op
+             */
+
             expect(sim.state.turn).eq(10);
 
             done();
