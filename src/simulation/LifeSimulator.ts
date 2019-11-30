@@ -51,8 +51,10 @@ class LifeSimulator extends AbstractSimulator {
   }
 }
 
-// @todo add other common rules
-const rules: { [x: string]: LifeRule } = {
+/**
+ * @todo add other common rules
+ */
+const rules: { ['conway']: LifeRule } = {
   conway: {
     born: [3],
     survive: [3, 2],
