@@ -5,6 +5,7 @@ import { writeFileSync } from 'fs';
 import LifeSimulator, { rules } from '@src/simulation/LifeSimulator'
 import LifeConfig from '@src/interfaces/LifeConfig';
 import State from '@src/simulation/State';
+import { StateData } from '@src/interfaces/State';
 
 const filePath = path.join(__dirname, '..', 'benchmarks', `${new Date().toISOString()}.json`)
 
@@ -12,11 +13,11 @@ const simConfig: LifeConfig = {
   rule: rules.conway,
   maxTurns: 10,
   neighborhoodSize: 3,
+  dataWidth: 50,
 }
 
 const benchmarkConfig = {
   experimentSize: 100,
-  dataSize: 50,
 }
 
 const reportResults: { event: string, tLoc: string, t: number, dt: number, data?: any }[] = []
@@ -49,7 +50,11 @@ const pushResult = (event: string, data?: any) => {
 pushResult('t0')
 
 // generate initial data
-const initialData = State.generatePopulation(benchmarkConfig.experimentSize, benchmarkConfig.dataSize)
+const initialData: StateData[] = [];
+
+for (let x = 0; x <= benchmarkConfig.experimentSize; x++) {
+  initialData.push(State.RANDOM_DATA(simConfig.dataWidth))
+}
 
 pushResult('initial-data')
 
@@ -61,17 +66,8 @@ Promise.all(sims.map((sim, $s) => {
     .then(() => {
       pushResult('sample', {
         sampleNumber: $s,
-        initialDensity: sim.state.initialData.reduce((x, row) => {
-          row.forEach(cell => { x = x + cell })
-
-          return x
-        }, Number(0)),
-        finalDensity: sim.state.exportData().reduce((x, row) => {
-          row.forEach(cell => { x = x + cell })
-
-          return x
-        }, Number(0)),
-
+        initialDensity: sim.state.initialData.reduce((a, b) => a + b, Number(0)),
+        finalDensity: sim.state.data.reduce((a, b) => a + b, Number(0)),
         /**
          * @todo avg time, all turns
          * @todo time per turn std dev
