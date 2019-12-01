@@ -52,6 +52,7 @@ describe('AbstractSimulator', () => {
 
       sim.turn().then(() => {
         expect(fake.calledOnce).eq(true, 'Expected `turn` to be called only once');
+        expect(sim.state.turn).eq(1, 'Unexepected value for state.turn, after sim.turn')
 
         done();
       }).catch(done);
@@ -78,6 +79,13 @@ describe('AbstractSimulator', () => {
           done();
         }).catch(done);
     });
+    it('increases the state.turn after applying all rules', (done) => {
+      sim.turn().then(() => {
+        expect(sim.state.turn).eq(1, 'Unexepected value for state.turn, after sim.turn has been called')
+
+        done();
+      }).catch(done);
+    });
   });
 
   describe('run()', () => {
@@ -88,7 +96,7 @@ describe('AbstractSimulator', () => {
         expect(sim.state.turn).eq(0);
 
         sim.run().then(() => {
-          expect(sim.state.turn).eq(10);
+          expect(sim.state.turn).eq(10, 'Unexpected value for state.turn');
           done();
         }).catch(done);
       });
