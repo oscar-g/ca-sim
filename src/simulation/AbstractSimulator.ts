@@ -1,21 +1,21 @@
 import NanoEvents from 'nanoevents';
 
 import Config from './../interfaces/Config';
+import IState, { CellState } from './../interfaces/State';
 import State from './State';
 import Location from './../interfaces/Location';
-import Cell from '../interfaces/Cell';
 import Simulator from './../interfaces/Simulator';
-import { InitialStateData } from '../interfaces/State';
+import { StateData } from '../interfaces/State';
 import { EventService } from '../interfaces/SimulatorEvents';
 
 export default abstract class AbstractSimulator implements Simulator {
-  public state: State;
+  public state: IState;
 
   private eventService: EventService;
   public on: EventService['on'];
 
-  constructor(public config: Config, initialData: InitialStateData) {
-    this.state = new State(initialData);
+  constructor(public config: Config, initialData: StateData) {
+    this.state = new State(initialData, config.dataWidth);
 
     this.eventService = new NanoEvents();
     this.on = this.eventService.on.bind(this.eventService);
@@ -30,29 +30,37 @@ export default abstract class AbstractSimulator implements Simulator {
       .then(() => this.run());
   }
 
-  // apply the sim rules at each location
-  // set the new state
+  // apply the sim rules at each location and set the new state
   turn() {
-    const p: Promise<Cell>[] = [];
+    const nextStateQueue: Promise<[Location, CellState]>[] = [];
 
-    this.eventService.emit('beforeTurn', this.state);
+    this.eventService.emit('beforeTurn', undefined);
 
     /**
      * @todo dynamic size
      */
-    for (let y = 0; y < this.state.getDataSize('y'); y++) {
-      for (let x = 0; x < this.state.getDataSize('x'); x++) {
-        p.push(this.applyRules({ x, y }));
-        this.eventService.emit('applyRule', { x, y });
+    for (let y = 0; y < this.config.dataWidth; y++) {
+      for (let x = 0; x < this.config.dataWidth; x++) {
+        nextStateQueue.push(this.applyRules({ x, y }).then(cellState => {
+          this.eventService.emit('applyRules', { x, y });
+
+          return [{ x, y }, cellState]
+        }));
       }
     }
 
-    return Promise.all(p).then((newStateCells) => {
+    return Promise.all(nextStateQueue).then((updates) => {
+      updates.forEach(([loc, state]) => {
+        this.state.setData(loc, state);
+      })
+
       /**
        * @todo keep track of old locations
        */
-      this.state.setNextTurnCells(newStateCells);
-      this.eventService.emit('afterTurn', this.state);
+
+      this.eventService.emit('afterTurn', undefined);
+
+      this.state.setTurn(this.state.turn + 1)
 
       return;
     });
@@ -62,5 +70,5 @@ export default abstract class AbstractSimulator implements Simulator {
     return this.state.turn >= this.config.maxTurns;
   }
 
-  abstract applyRules(loc: Location): Promise<Cell>;
+  abstract applyRules(loc: Location): Promise<CellState>;
 }

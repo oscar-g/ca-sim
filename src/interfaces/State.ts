@@ -19,10 +19,11 @@ interface State {
 
   setData(loc: Location, state: CellState): this;
   delData(loc: Location): this;
-  getData(loc: Location): CellState
-  getDataSize(dimension?: string): number;
+  getData(loc: Location): CellState;
 
   getMooreNeighborhood(loc: Location, size: number): StateData;
+
+  setTurn(to: number): number;
 }
 
 export default State;

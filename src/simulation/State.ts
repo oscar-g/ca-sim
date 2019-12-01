@@ -65,25 +65,18 @@ class State implements IState {
     return new Uint8Array(nbh)
   }
 
+  setTurn(to: number) {
+    this.turn = to;
+
+    return this.turn;
+  }
+
   // /**
   //  * Return list of living cells in neighborhood centered at loc.
   //  */
   // getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
   //   return this.getNeighborhood(loc, size).find((_: Cell) => _.state === 1);
   // }
-
-  /**
-   * @todo support dynamic size
-   */
-  getDataSize(dimension?: string): number {
-    switch (dimension) {
-      case 'x':
-      case 'y':
-      default:
-        return this.initialData.length;
-    }
-  }
-
 
   static generateRandomIndividual(chrSize: number): StateData {
     const genome: (0 | 1)[][] = [];
