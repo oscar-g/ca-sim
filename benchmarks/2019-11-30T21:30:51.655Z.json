@@ -3,7 +3,7 @@
     "experimentSize": 100,
     "dataSize": 50
   },
-  "simulator": "Life Simulator",
+  "simulator": "Life Simulator (quadtree-lib)",
   "simulatorConfig": {
     "rule": {
       "born": [
