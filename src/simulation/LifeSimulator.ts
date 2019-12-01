@@ -21,28 +21,23 @@ class LifeSimulator extends AbstractSimulator {
    * @todo optimize rule calculation
    */
   applyRules(loc: Location) {
-    const livingNeighbors = this.state
+    const nbh: Uint8Array = this.state
       .getMooreNeighborhood(loc, this.config.neighborhoodSize);
 
     // exclude the current cell from the "living neighbor" count
-    livingNeighbors.set([0], this.state.getIndex(loc))
+    nbh.set([0], Math.floor(nbh.length / 2));
 
-    let nextState: CellState = 0;
+    const livingNeighbors: number = nbh.reduce((a, b) => a + b, 0)
 
-    for (let s = 0; s < this.config.rule.survive.length; s++) {
-      if (livingNeighbors.length === this.config.rule.survive[s]) {
-        nextState = 1
-        break;
-      }
+    var nextState: CellState = 0;
+
+    if (this.config.rule.survive.includes(livingNeighbors)) {
+      nextState = 1
     }
 
-    for (let s = 0; s < this.config.rule.born.length; s++) {
-      if (livingNeighbors.length === this.config.rule.born[s]) {
-        nextState = 1
-        break;
-      }
+    if (this.config.rule.born.includes(livingNeighbors)) {
+      nextState = 1
     }
-
 
     return Promise.resolve(nextState);
   }
