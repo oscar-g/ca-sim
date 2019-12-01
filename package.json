@@ -16,8 +16,7 @@
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
   "license": "MIT",
   "dependencies": {
-    "nanoevents": "^1.0.8",
-    "ts-option": "^1.1.5"
+    "nanoevents": "^1.0.8"
   },
   "devDependencies": {
     "@types/chai": "^4.2.5",
