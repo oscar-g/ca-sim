@@ -1,8 +1,4 @@
-// tslint:disable:import-name
-import QuadTree from 'quadtree-lib';
-import { Option, none, some } from 'ts-option';
-import IState, { InitialStateData } from '../interfaces/State';
-import Cell from '../interfaces/Cell';
+import IState, { StateData, CellState } from '../interfaces/State';
 import Location from '../interfaces/Location';
 
 /**
@@ -11,129 +7,70 @@ import Location from '../interfaces/Location';
  * */
 class State implements IState {
   turn: number = 0;
-  /**
-   * @todo use service with pluginable data type
-   * 
-   * in order to use something other than quadtree, if desired
-   */
-  data: QuadTree<Cell>;
+  data: StateData
 
-  constructor(public initialData: InitialStateData) {
-    this.data = new QuadTree({
-      width: initialData.length,
-      height: initialData.length,
-      maxElements: 9,
-    });
-
-    initialData.forEach((chr, y) => {
-      chr.forEach((state, x) => {
-        if (state === 1) {
-          // populate live cells only
-          this.setData({
-            x, y,
-            state: <Cell['state']>state,
-          });
-        }
-      });
-    });
-  }
-
-  exportData() {
-    const data: InitialStateData = [];
-
-    for (let y = 0; y < this.initialData.length; y++) {
-      data[y] = [];
-
-      for (let x = 0; x < this.initialData.length; x++) {
-        data[y][x] = this.getData({ x, y }).map(_ => _.state).getOrElse(0);
-      }
+  constructor(public initialData: StateData, public dataWidth: number) {
+    if (dataWidth ** 2 !== initialData.length) {
+      throw new Error('`initialData.length` must be the square of `dataWidth`')
     }
 
-    return data;
+    this.data = initialData;
   }
 
-  setNextTurnCells(cells: Cell[]) {
-    this.data.clear();
-
-    cells.forEach((c) => {
-      // populate live cells only
-      if (c.state === 1) {
-        this.setData(c);
-      }
-    });
-
-    this.turn++;
-
-    return this;
-  }
-
-  setData({ x, y, ...cell }: Cell) {
-    // delete old data, first
-    this.delData({ x, y });
-
-    // add the cell
-    this.data.push({
-      x: Math.abs(x % this.initialData.length),
-      y: Math.abs(y % this.initialData.length),
-      ...cell,
-    });
-
-    return this;
-  }
-
-  delData({ x, y }: Location) {
-    // find all data at location
-    this.data.where({
-      x: Math.abs(x % this.initialData.length),
-      y: Math.abs(y % this.initialData.length),
-    }).forEach((l) => {
-      this.data.remove(l);
-    });
-
-    return this;
-  }
-
-  getData({ x, y }: Location): Option<Cell> {
-    const result = this.data.where({
-      x: Math.abs(x % this.initialData.length),
-      y: Math.abs(y % this.initialData.length),
-    });
-
-    return result.length === 0 ? none : some<Cell>(result[0]);
+  dataToString() {
+    return this.data.toString();
   }
 
   /**
-   * Return elements of the neighborhood centered at loc
+   * Calculate the index of a location, assuming a coordinate system with the orgin at the top-left
    */
-  getNeighborhood(loc: Location, size: number = 3) {
-    const [yBounds, xBounds] = State.getNeighborhoodBounds(loc, size);
-    const newSize = yBounds[1] - yBounds[0];
+  getIndex({ x, y }: Location): number {
+    return Math.abs((this.dataWidth * (y % this.dataWidth)) + (x % this.dataWidth))
+  }
 
-    const nbh = new QuadTree<Cell>({
-      width: newSize,
-      height: newSize,
-      maxElements: 4,
-      x: loc.x,
-      y: loc.y,
-    });
+  setData(loc: Location, state: CellState) {
+    this.data.set([state], this.getIndex(loc))
 
+    return this;
+  }
+
+  delData(loc: Location) {
+    this.data.set([0], this.getIndex(loc))
+
+    return this;
+  }
+
+  getData(loc: Location) {
+    return this.data[this.getIndex(loc)] === 0 ? 0 : 1
+  }
+
+  /**
+   * @param loc Location representing the neighboorhood center
+   * @param size Neighborhood size
+   * 
+   * @todo rework "size" into more-accurate concept "Chebyshev distance" or "range"
+   */
+  getMooreNeighborhood(loc: Location, size: number = 3) {
+    const [yBounds, xBounds] = getNeighborhoodBounds(loc, size);
+    const nbh: CellState[] = []
+
+
+    // get data for all cells within the range
     for (let y = yBounds[0]; y <= yBounds[1]; y++) {
       for (let x = xBounds[0]; x <= xBounds[1]; x++) {
-        const cell = this.getData({ x, y }).getOrElse({ x, y, state: 0 });
-
-        nbh.push(cell);
+        nbh.push(this.getData({ x, y }))
       }
     }
 
-    return nbh;
+    return new Uint8Array(nbh)
   }
 
-  /**
-   * Return list of living cells in neighborhood centered at loc.
-   */
-  getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
-    return this.getNeighborhood(loc, size).find((_: Cell) => _.state === 1);
-  }
+  // /**
+  //  * Return list of living cells in neighborhood centered at loc.
+  //  */
+  // getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
+  //   return this.getNeighborhood(loc, size).find((_: Cell) => _.state === 1);
+  // }
 
   /**
    * @todo support dynamic size
@@ -147,30 +84,15 @@ class State implements IState {
     }
   }
 
-  /**
-   * Returns the min/max x/y boundary of a s-sized neighborhood, centered at loc
-   */
-  static getNeighborhoodBounds(loc: Location, s: number = 3): [[number, number], [number, number]] {
-    let size = s;
-    if (size % 2 === 0) { size++; }
-    if (size < 3) { size = 3; }
 
-    const half = (size - 1) / 2;
-
-    return [
-      [loc.y - half, loc.y + half],
-      [loc.x - half, loc.x + half],
-    ];
-  }
-
-  static generateRandomIndividual(chrSize: number): InitialStateData {
-    const genome: (0|1)[][] = [];
+  static generateRandomIndividual(chrSize: number): StateData {
+    const genome: (0 | 1)[][] = [];
 
     for (let chrNum = 0; chrNum < chrSize; chrNum++) {
-      const code: (0|1)[] = [];
+      const code: (0 | 1)[] = [];
 
       for (let baseNum = 0; baseNum < chrSize; baseNum++) {
-        code[baseNum] = Math.round(Math.random()) as (0|1);
+        code[baseNum] = Math.round(Math.random()) as (0 | 1);
       }
 
       genome.push(code);
@@ -180,8 +102,8 @@ class State implements IState {
     return genome;
   }
 
-  static generatePopulation(popSize: number, chrSize: number): InitialStateData[] {
-    const p: InitialStateData[] = [];
+  static generatePopulation(popSize: number, chrSize: number): StateData[] {
+    const p: StateData[] = [];
 
     for (let i = popSize; i > 0; i--) {
       p.push(State.generateRandomIndividual(chrSize));
@@ -192,3 +114,23 @@ class State implements IState {
 }
 
 export default State;
+
+
+/**
+ * Calculate min/max x/y boundary of a s-sized square, centered at loc
+ * 
+ * @param s Neighboorhood edge size. Should be odd an number. Even numbers will be incremented.
+ * @returns 2d tuple representing corners of neighboorhood `[[minY, maxY], [minX, maxX]]`
+ */
+function getNeighborhoodBounds(loc: Location, s: number = 3): [[number, number], [number, number]] {
+  let size = s;
+  if (size % 2 === 0) { size++; }
+  if (size < 3) { size = 3; }
+
+  const half = (size - 1) / 2;
+
+  return [
+    [loc.y - half, loc.y + half],
+    [loc.x - half, loc.x + half],
+  ];
+}
