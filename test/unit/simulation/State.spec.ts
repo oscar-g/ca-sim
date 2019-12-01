@@ -1,10 +1,41 @@
 import { expect } from 'chai';
 
 import State from '../../../src/simulation/State';
+import Location from '@src/interfaces/Location';
 
 const getState = () => new State(new Uint8Array([0, 1, 1, 0]), 2)
 
 describe('State', () => {
+  describe('getIndex()', () => {
+    it('implements toriodal data array', () => {
+      const testData: [Location[], number][] = [
+        [[ // NW corner
+          { x: 2, y: 2 },
+          { x: -2, y: -2 },
+        ], 0],
+        [[ // SW corner
+          { x: 3, y: 3 },
+          { x: -3, y: -3 },
+        ], 3],
+        [[ // vertical
+          { x: 1, y: 2 },
+          { x: 1, y: -2 },
+          { x: -1, y: -2 },
+          { x: -1, y: 2 },
+        ], 1]]
+
+
+      testData.forEach(([locs, expectedIndex]) => {
+        locs.forEach(loc => {
+          const state = getState();
+
+          state.getIndex(loc);
+
+          expect(state.getIndex(loc)).eq(expectedIndex, `Unexpected index for location (x=${loc.x}, y=${loc.y})`);
+        });
+      });
+    })
+  })
   describe('setData()', () => {
     it('updates live cells', () => {
       const state = getState()
