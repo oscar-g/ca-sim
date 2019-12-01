@@ -25,6 +25,7 @@
     "@types/mocha": "^5.2.7",
     "@types/nanoevents": "^1.0.0",
     "@types/node": "^12.12.14",
+    "@types/randombytes": "^2.0.0",
     "@types/sinon": "^7.5.1",
     "chai": "^4.2.0",
     "cz-conventional-changelog": "^3.0.2",

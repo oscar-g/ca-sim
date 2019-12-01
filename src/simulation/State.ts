@@ -1,5 +1,6 @@
 import IState, { StateData, CellState } from '../interfaces/State';
 import Location from '../interfaces/Location';
+import randomBytes from 'randombytes';
 
 /**
  * @todo support growing data size
@@ -71,38 +72,8 @@ class State implements IState {
     return this.turn;
   }
 
-  // /**
-  //  * Return list of living cells in neighborhood centered at loc.
-  //  */
-  // getLivingNeighbors(loc: Location, size: number = 3): Cell[] {
-  //   return this.getNeighborhood(loc, size).find((_: Cell) => _.state === 1);
-  // }
-
-  static generateRandomIndividual(chrSize: number): StateData {
-    const genome: (0 | 1)[][] = [];
-
-    for (let chrNum = 0; chrNum < chrSize; chrNum++) {
-      const code: (0 | 1)[] = [];
-
-      for (let baseNum = 0; baseNum < chrSize; baseNum++) {
-        code[baseNum] = Math.round(Math.random()) as (0 | 1);
-      }
-
-      genome.push(code);
-    }
-
-    // @todo track unique genomes (ie md5(genome) suffix)
-    return genome;
-  }
-
-  static generatePopulation(popSize: number, chrSize: number): StateData[] {
-    const p: StateData[] = [];
-
-    for (let i = popSize; i > 0; i--) {
-      p.push(State.generateRandomIndividual(chrSize));
-    }
-
-    return p;
+  static RANDOM_DATA(dataWidth: number): StateData {
+    return Uint8Array.from(randomBytes(dataWidth ** 2))
   }
 }
 
