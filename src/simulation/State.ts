@@ -26,7 +26,7 @@ class State implements IState {
    * Calculate the index of a location, assuming a coordinate system with the orgin at the top-left
    */
   getIndex({ x, y }: Location): number {
-    return Math.abs((this.dataWidth * (y % this.dataWidth)) + (x % this.dataWidth))
+    return (this.dataWidth * Math.abs(y % this.dataWidth)) + Math.abs(x % this.dataWidth);
   }
 
   setData(loc: Location, state: CellState) {
@@ -54,7 +54,6 @@ class State implements IState {
   getMooreNeighborhood(loc: Location, size: number = 3) {
     const [yBounds, xBounds] = getNeighborhoodBounds(loc, size);
     const nbh: CellState[] = []
-
 
     // get data for all cells within the range
     for (let y = yBounds[0]; y <= yBounds[1]; y++) {

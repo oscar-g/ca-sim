@@ -16,6 +16,7 @@ describe('State', () => {
         [[ // SW corner
           { x: 3, y: 3 },
           { x: -3, y: -3 },
+          { x: 3, y: -3 },
         ], 3],
         [[ // vertical
           { x: 1, y: 2 },
