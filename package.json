@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "ts-mocha -p test/tsconfig.json test/**/*.spec.ts",
+    "ts-mocha": "ts-mocha -p test/tsconfig.json -r tsconfig-paths/register",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "npm run ts-mocha test/unit/**/*.spec.ts",
+    "test:e2e": "npm run ts-mocha test/e2e/**/*.spec.ts",
     "lint": "tslint --fix -p ./ && tslint --fix -p ./test/ -c ./tslint.json",
     "benchmark": "ts-node -r tsconfig-paths/register ./test/benchmark",
     "build": "rm -rf dist && tsc"
