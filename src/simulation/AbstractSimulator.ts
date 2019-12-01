@@ -41,10 +41,13 @@ export default abstract class AbstractSimulator implements Simulator {
      */
     for (let y = 0; y < this.config.dataWidth; y++) {
       for (let x = 0; x < this.config.dataWidth; x++) {
-        nextStateQueue.push(this.applyRules({ x, y }).then(cellState => {
-          this.eventService.emit('applyRules', { x, y });
+        const loc: Location = { x, y }
 
-          return [{ x, y }, cellState]
+        nextStateQueue.push(this.applyRules(loc).then(cellState => {
+          this.eventService.emit('applyRules', loc);
+
+          // tslint:disable-next-line: prefer-type-cast
+          return [loc, cellState] as [Location, CellState]
         }));
       }
     }
