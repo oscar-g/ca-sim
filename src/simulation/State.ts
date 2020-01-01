@@ -8,11 +8,11 @@ import randomBytes from 'randombytes';
  * */
 class State implements IState {
   turn: number = 0;
-  data: StateData
+  data: StateData;
 
   constructor(public initialData: StateData, public dataWidth: number) {
     if (dataWidth ** 2 !== initialData.length) {
-      throw new Error('`initialData.length` must be the square of `dataWidth`')
+      throw new Error('`initialData.length` must be the square of `dataWidth`');
     }
 
     this.data = initialData;
@@ -30,19 +30,19 @@ class State implements IState {
   }
 
   setData(loc: Location, state: CellState) {
-    this.data.set([state], this.getIndex(loc))
+    this.data.set([state], this.getIndex(loc));
 
     return this;
   }
 
   delData(loc: Location) {
-    this.data.set([0], this.getIndex(loc))
+    this.data.set([0], this.getIndex(loc));
 
     return this;
   }
 
   getData(loc: Location) {
-    return this.data[this.getIndex(loc)] === 0 ? 0 : 1
+    return this.data[this.getIndex(loc)] === 0 ? 0 : 1;
   }
 
   /**
@@ -53,16 +53,16 @@ class State implements IState {
    */
   getMooreNeighborhood(loc: Location, size: number = 3) {
     const [yBounds, xBounds] = getNeighborhoodBounds(loc, size);
-    const nbh: CellState[] = []
+    const nbh: CellState[] = [];
 
     // get data for all cells within the range
     for (let y = yBounds[0]; y <= yBounds[1]; y++) {
       for (let x = xBounds[0]; x <= xBounds[1]; x++) {
-        nbh.push(this.getData({ x, y }))
+        nbh.push(this.getData({ x, y }));
       }
     }
 
-    return new Uint8Array(nbh)
+    return new Uint8Array(nbh);
   }
 
   setTurn(to: number) {
@@ -72,7 +72,7 @@ class State implements IState {
   }
 
   static RANDOM_DATA(dataWidth: number): StateData {
-    return Uint8Array.from(randomBytes(dataWidth ** 2))
+    return Uint8Array.from(randomBytes(dataWidth ** 2));
   }
 }
 

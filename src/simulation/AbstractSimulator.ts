@@ -8,6 +8,9 @@ import Simulator from './../interfaces/Simulator';
 import { StateData } from '../interfaces/State';
 import { EventService } from '../interfaces/SimulatorEvents';
 
+/**
+ * A turn-based, two-dimensional, cellular automation
+ */
 export default abstract class AbstractSimulator implements Simulator {
   public state: IState;
 
@@ -41,13 +44,13 @@ export default abstract class AbstractSimulator implements Simulator {
      */
     for (let y = 0; y < this.config.dataWidth; y++) {
       for (let x = 0; x < this.config.dataWidth; x++) {
-        const loc: Location = { x, y }
+        const loc: Location = { x, y };
 
         nextStateQueue.push(this.applyRules(loc).then(cellState => {
           this.eventService.emit('applyRules', loc);
 
           // tslint:disable-next-line: prefer-type-cast
-          return [loc, cellState] as [Location, CellState]
+          return [loc, cellState] as [Location, CellState];
         }));
       }
     }
@@ -55,7 +58,7 @@ export default abstract class AbstractSimulator implements Simulator {
     return Promise.all(nextStateQueue).then((updates) => {
       updates.forEach(([loc, state]) => {
         this.state.setData(loc, state);
-      })
+      });
 
       /**
        * @todo keep track of old locations
@@ -63,7 +66,7 @@ export default abstract class AbstractSimulator implements Simulator {
 
       this.eventService.emit('afterTurn', undefined);
 
-      this.state.setTurn(this.state.turn + 1)
+      this.state.setTurn(this.state.turn + 1);
 
       return;
     });

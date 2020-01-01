@@ -6,8 +6,11 @@ import LifeRule from '../interfaces/LifeRule';
 import { StateData, CellState } from '../interfaces/State';
 import State from './State';
 
+/**
+ * A totalistic cellular automation
+ */
 class LifeSimulator extends AbstractSimulator {
-  state!: State
+  state!: State;
 
   constructor(public config: LifeConfig, initialData: StateData) {
     super(config, initialData);
@@ -27,16 +30,16 @@ class LifeSimulator extends AbstractSimulator {
     // exclude the current cell from the "living neighbor" count
     nbh.set([0], Math.floor(nbh.length / 2));
 
-    const livingNeighbors: number = nbh.reduce((a, b) => a + b, 0)
+    const livingNeighbors: number = nbh.reduce((a, b) => a + b, 0);
 
     var nextState: CellState = 0;
 
     if (this.config.rule.survive.includes(livingNeighbors)) {
-      nextState = 1
+      nextState = 1;
     }
 
     if (this.config.rule.born.includes(livingNeighbors)) {
-      nextState = 1
+      nextState = 1;
     }
 
     return Promise.resolve(nextState);
@@ -46,7 +49,7 @@ class LifeSimulator extends AbstractSimulator {
 /**
  * @todo add other common rules
  */
-const rules: { ['conway']: LifeRule } = {
+const rules: { ['conway']: LifeRule; } = {
   conway: {
     born: [3],
     survive: [3, 2],
