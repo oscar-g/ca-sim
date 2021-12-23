@@ -1,13 +1,11 @@
-import LifeSimulator, { rules as lifeSimulatorRules } from './simulation/LifeSimulator';
-import AbstractSimulator from './simulation/AbstractSimulator';
-import State from './simulation/State';
-import { StateData } from './interfaces/State';
-
-export {
-  LifeSimulator,
-  AbstractSimulator,
-  State,
-  StateData,
-  StateData as InitialStateData,
-  lifeSimulatorRules,
-};
+export * from './interfaces/Config';
+export * from './interfaces/LifeConfig';
+export * from './interfaces/LifeRule';
+export * from './interfaces/Location';
+export * from './interfaces/Simulator';
+export * from './interfaces/SimulatorEvents';
+export * from './interfaces/State';
+export * from './simulation/AbstractSimulator';
+export * from './simulation/LifeSimulator';
+export * from './simulation/rules';
+export * from './simulation/State';
