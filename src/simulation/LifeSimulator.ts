@@ -1,17 +1,13 @@
-
-import AbstractSimulator from './AbstractSimulator';
-import Location from '../interfaces/Location';
 import LifeConfig from '../interfaces/LifeConfig';
-import LifeRule from '../interfaces/LifeRule';
-import { StateData, CellState } from '../interfaces/State';
-import State from './State';
+import Location from '../interfaces/Location';
+import { CellState, StateData } from '../interfaces/State';
+import AbstractSimulator from './AbstractSimulator';
+import { lifeRules as rules } from './rules';
 
 /**
  * A totalistic cellular automation
  */
 class LifeSimulator extends AbstractSimulator {
-  state!: State;
-
   constructor(public config: LifeConfig, initialData: StateData) {
     super(config, initialData);
   }
@@ -24,8 +20,10 @@ class LifeSimulator extends AbstractSimulator {
    * @todo optimize rule calculation
    */
   applyRules(loc: Location) {
-    const nbh: Uint8Array = this.state
-      .getMooreNeighborhood(loc, this.config.neighborhoodSize);
+    const nbh: Uint8Array = this.state.getMooreNeighborhood(
+      loc,
+      this.config.neighborhoodSize,
+    );
 
     // exclude the current cell from the "living neighbor" count
     nbh.set([0], Math.floor(nbh.length / 2));
@@ -45,16 +43,6 @@ class LifeSimulator extends AbstractSimulator {
     return Promise.resolve(nextState);
   }
 }
-
-/**
- * @todo add other common rules
- */
-const rules: { ['conway']: LifeRule; } = {
-  conway: {
-    born: [3],
-    survive: [3, 2],
-  },
-};
 
 export default LifeSimulator;
 export { rules };

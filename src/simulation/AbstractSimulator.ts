@@ -1,18 +1,17 @@
 import NanoEvents from 'nanoevents';
-
+import { EventService } from '../interfaces/SimulatorEvents';
+import { StateData } from '../interfaces/State';
 import Config from './../interfaces/Config';
-import IState, { CellState } from './../interfaces/State';
-import State from './State';
 import Location from './../interfaces/Location';
 import Simulator from './../interfaces/Simulator';
-import { StateData } from '../interfaces/State';
-import { EventService } from '../interfaces/SimulatorEvents';
+import IState, { CellState } from './../interfaces/State';
+import State from './State';
 
 /**
  * A turn-based, two-dimensional, cellular automation
  */
 export default abstract class AbstractSimulator implements Simulator {
-  public state: IState;
+  public state!: IState;
 
   private eventService: EventService;
   public on: EventService['on'];
@@ -29,8 +28,7 @@ export default abstract class AbstractSimulator implements Simulator {
       return Promise.resolve(this);
     }
 
-    return this.turn()
-      .then(() => this.run());
+    return this.turn().then(() => this.run());
   }
 
   // apply the sim rules at each location and set the new state
@@ -46,16 +44,18 @@ export default abstract class AbstractSimulator implements Simulator {
       for (let x = 0; x < this.config.dataWidth; x++) {
         const loc: Location = { x, y };
 
-        nextStateQueue.push(this.applyRules(loc).then(cellState => {
-          this.eventService.emit('applyRules', loc);
+        nextStateQueue.push(
+          this.applyRules(loc).then(cellState => {
+            this.eventService.emit('applyRules', loc);
 
-          // tslint:disable-next-line: prefer-type-cast
-          return [loc, cellState] as [Location, CellState];
-        }));
+            // tslint:disable-next-line: prefer-type-cast
+            return [loc, cellState] as [Location, CellState];
+          }),
+        );
       }
     }
 
-    return Promise.all(nextStateQueue).then((updates) => {
+    return Promise.all(nextStateQueue).then(updates => {
       updates.forEach(([loc, state]) => {
         this.state.setData(loc, state);
       });
