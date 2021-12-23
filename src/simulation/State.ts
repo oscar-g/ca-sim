@@ -55,7 +55,7 @@ export class State implements IState {
    * @todo rework "size" into more-accurate concept "Chebyshev distance" or "range"
    */
   getMooreNeighborhood(loc: Location, size: number = 3) {
-    const [yBounds, xBounds] = getNeighborhoodBounds(loc, size);
+    const [yBounds, xBounds] = this.getNeighborhoodBounds(loc, size);
     const nbh: CellState[] = [];
 
     // get data for all cells within the range
@@ -74,33 +74,33 @@ export class State implements IState {
     return this.turn;
   }
 
-  static RANDOM_DATA(dataWidth: number): StateData {
+  getRandomData(dataWidth: number): StateData {
     return Uint8Array.from(randomBytes(dataWidth ** 2));
   }
-}
 
-/**
- * Calculate min/max x/y boundary of a s-sized square, centered at loc
- *
- * @param s Neighboorhood edge size. Should be odd an number. Even numbers will be incremented.
- * @returns 2d tuple representing corners of neighboorhood `[[minY, maxY], [minX, maxX]]`
- */
-function getNeighborhoodBounds(
-  loc: Location,
-  s: number = 3,
-): [[number, number], [number, number]] {
-  let size = s;
-  if (size % 2 === 0) {
-    size++;
+  /**
+   * Calculate min/max x/y boundary of a s-sized square, centered at loc
+   *
+   * @param s Neighboorhood edge size. Should be odd an number. Even numbers will be incremented.
+   * @returns 2d tuple representing corners of neighboorhood `[[minY, maxY], [minX, maxX]]`
+   */
+  getNeighborhoodBounds(
+    loc: Location,
+    s: number = 3,
+  ): [[number, number], [number, number]] {
+    let size = s;
+    if (size % 2 === 0) {
+      size++;
+    }
+    if (size < 3) {
+      size = 3;
+    }
+
+    const half = (size - 1) / 2;
+
+    return [
+      [loc.y - half, loc.y + half],
+      [loc.x - half, loc.x + half],
+    ];
   }
-  if (size < 3) {
-    size = 3;
-  }
-
-  const half = (size - 1) / 2;
-
-  return [
-    [loc.y - half, loc.y + half],
-    [loc.x - half, loc.x + half],
-  ];
 }

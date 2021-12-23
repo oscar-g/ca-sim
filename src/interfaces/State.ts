@@ -24,4 +24,15 @@ export interface IState {
   getMooreNeighborhood(loc: Location, size: number): StateData;
 
   setTurn(to: number): number;
+  getRandomData(dataWidth: number): StateData;
+  /**
+   * Calculate min/max x/y boundary of a s-sized square, centered at loc
+   *
+   * @param s Neighboorhood edge size. Should be odd an number. Even numbers will be incremented.
+   * @returns 2d tuple representing corners of neighboorhood `[[minY, maxY], [minX, maxX]]`
+   */
+  getNeighborhoodBounds(
+    loc: Location,
+    s?: number,
+  ): [[number, number], [number, number]];
 }
