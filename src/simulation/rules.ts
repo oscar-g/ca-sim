@@ -1,4 +1,4 @@
-import LifeRule from '../interfaces/LifeRule';
+import { LifeRule } from '../interfaces/LifeRule';
 
 // @todo add other common rules
 export const lifeRules: { [k: string]: LifeRule } = {

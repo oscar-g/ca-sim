@@ -1,12 +1,12 @@
-import IState, { StateData, CellState } from '../interfaces/State';
-import Location from '../interfaces/Location';
 import randomBytes from 'randombytes';
+import { Location } from '../interfaces/Location';
+import { CellState, IState as IState, StateData } from '../interfaces/State';
 
 /**
  * @todo support growing data size
  * @todo remove assumptions on data size
  * */
-class State implements IState {
+export class State implements IState {
   turn: number = 0;
   data: StateData;
 
@@ -26,7 +26,10 @@ class State implements IState {
    * Calculate the index of a location, assuming a coordinate system with the orgin at the top-left
    */
   getIndex({ x, y }: Location): number {
-    return (this.dataWidth * Math.abs(y % this.dataWidth)) + Math.abs(x % this.dataWidth);
+    return (
+      this.dataWidth * Math.abs(y % this.dataWidth) +
+      Math.abs(x % this.dataWidth)
+    );
   }
 
   setData(loc: Location, state: CellState) {
@@ -48,7 +51,7 @@ class State implements IState {
   /**
    * @param loc Location representing the neighboorhood center
    * @param size Neighborhood size
-   * 
+   *
    * @todo rework "size" into more-accurate concept "Chebyshev distance" or "range"
    */
   getMooreNeighborhood(loc: Location, size: number = 3) {
@@ -76,19 +79,23 @@ class State implements IState {
   }
 }
 
-export default State;
-
-
 /**
  * Calculate min/max x/y boundary of a s-sized square, centered at loc
- * 
+ *
  * @param s Neighboorhood edge size. Should be odd an number. Even numbers will be incremented.
  * @returns 2d tuple representing corners of neighboorhood `[[minY, maxY], [minX, maxX]]`
  */
-function getNeighborhoodBounds(loc: Location, s: number = 3): [[number, number], [number, number]] {
+function getNeighborhoodBounds(
+  loc: Location,
+  s: number = 3,
+): [[number, number], [number, number]] {
   let size = s;
-  if (size % 2 === 0) { size++; }
-  if (size < 3) { size = 3; }
+  if (size % 2 === 0) {
+    size++;
+  }
+  if (size < 3) {
+    size = 3;
+  }
 
   const half = (size - 1) / 2;
 

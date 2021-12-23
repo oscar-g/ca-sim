@@ -1,10 +1,10 @@
-import Config from './Config';
-import Location from './Location';
-import State, { CellState } from './State';
+import { Config } from './Config';
+import { Location } from './Location';
+import { CellState, IState } from './State';
 
-interface Simulator {
+export interface Simulator {
   config: Config;
-  state: State;
+  state: IState;
 
   /**
    * Run the simulation until complete.
@@ -27,5 +27,3 @@ interface Simulator {
    */
   applyRules(loc: Location): Promise<CellState>;
 }
-
-export default Simulator;

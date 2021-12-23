@@ -1,9 +1,7 @@
 /**
  * Describe a rule for the 'Game of life'.
  */
-interface Rule {
+export interface LifeRule {
   born: number[];
   survive: number[];
 }
-
-export default Rule;

@@ -1,16 +1,16 @@
 import NanoEvents from 'nanoevents';
 import { EventService } from '../interfaces/SimulatorEvents';
 import { StateData } from '../interfaces/State';
-import Config from './../interfaces/Config';
-import Location from './../interfaces/Location';
-import Simulator from './../interfaces/Simulator';
-import IState, { CellState } from './../interfaces/State';
-import State from './State';
+import { Config } from './../interfaces/Config';
+import { Location } from './../interfaces/Location';
+import { Simulator } from './../interfaces/Simulator';
+import { CellState, IState as IState } from './../interfaces/State';
+import { State } from './State';
 
 /**
  * A turn-based, two-dimensional, cellular automation
  */
-export default abstract class AbstractSimulator implements Simulator {
+export abstract class AbstractSimulator implements Simulator {
   public state!: IState;
 
   private eventService: EventService;

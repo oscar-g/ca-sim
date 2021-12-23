@@ -1,13 +1,13 @@
-import LifeConfig from '../interfaces/LifeConfig';
-import Location from '../interfaces/Location';
+import { LifeConfig } from '../interfaces/LifeConfig';
+import { Location } from '../interfaces/Location';
 import { CellState, StateData } from '../interfaces/State';
-import AbstractSimulator from './AbstractSimulator';
+import { AbstractSimulator } from './AbstractSimulator';
 import { lifeRules as rules } from './rules';
 
 /**
  * A totalistic cellular automation
  */
-class LifeSimulator extends AbstractSimulator {
+export class LifeSimulator extends AbstractSimulator {
   constructor(public config: LifeConfig, initialData: StateData) {
     super(config, initialData);
   }
@@ -44,5 +44,4 @@ class LifeSimulator extends AbstractSimulator {
   }
 }
 
-export default LifeSimulator;
 export { rules };

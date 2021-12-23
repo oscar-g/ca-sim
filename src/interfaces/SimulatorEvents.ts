@@ -1,8 +1,7 @@
 import NanoEvents from 'nanoevents';
+import { Location } from './Location';
 
-import Location from './Location';
-
-export default interface SimulatorEvents {
+export interface SimulatorEvents {
   beforeTurn: void;
   afterTurn: void;
   applyRules: Location;

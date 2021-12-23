@@ -1,4 +1,4 @@
-import Location from './Location';
+import { Location } from './Location';
 
 /**
  * Simulator state machine
@@ -7,9 +7,9 @@ import Location from './Location';
  * Uses QuadTree to represent input data internally.
  */
 export type StateData = Uint8Array;
-export type CellState = 0 | 1
+export type CellState = 0 | 1;
 
-interface State {
+export interface IState {
   turn: number;
   data: StateData;
   dataWidth: number;
@@ -25,5 +25,3 @@ interface State {
 
   setTurn(to: number): number;
 }
-
-export default State;
