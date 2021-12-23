@@ -11,7 +11,8 @@
     "test:e2e": "npm run ts-mocha test/e2e/**/*.spec.ts",
     "lint": "tslint --fix -p ./ && tslint --fix -p ./test/ -c ./tslint.json",
     "benchmark": "ts-node -r tsconfig-paths/register ./test/benchmark",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "prepublish": "npm run build"
   },
   "author": "Oscar Gonzalez <contact@oscargonzalez.us>",
   "license": "MIT",
